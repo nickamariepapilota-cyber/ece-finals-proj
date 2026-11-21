@@ -1,1 +1,889 @@
 
+/* =========================================
+   WILDGUARD - STYLESHEET
+   Modern Wildlife Conservation Website
+========================================= */
+
+/* 1. COLOR PALETTE & GLOBAL SETTINGS */
+
+:root {
+    --cafe-noir: #4C3D19;
+    --kombu-green: #354024;
+    --moss-green: #889063;
+    --tan: #CFBB99;
+    --bone: #E5D7C4;
+
+    --white: #FFFFFF;
+    --dark: #252B1F;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bone);
+    color: var(--dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+::selection {
+    background: var(--moss-green);
+    color: var(--white);
+}
+
+/* 2. TYPOGRAPHY */
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(2.8rem, 5vw, 5.5rem);
+    font-weight: 600;
+    letter-spacing: -1.5px;
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+.eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--moss-green);
+    margin-bottom: 20px;
+}
+
+/* 3. NAVIGATION BAR */
+
+.navbar {
+    width: 100%;
+    min-height: 90px;
+    padding: 20px 7%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--kombu-green);
+    color: var(--bone);
+
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--tan);
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.navbar nav a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.navbar nav a:hover {
+    color: var(--tan);
+}
+
+/* 4. LANDING PAGE */
+
+#landing-page {
+    min-height: 100vh;
+    background: var(--kombu-green);
+    color: var(--bone);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: auto;
+
+    padding: 40px 7% 70px;
+
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    gap: 7%;
+}
+
+/* Hero image */
+
+.hero-image {
+    position: relative;
+    width: 100%;
+    height: 580px;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.hero-image:hover img {
+    transform: scale(1.06);
+}
+
+/* Subtle image overlay */
+
+.hero-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to top,
+        rgba(53, 64, 36, 0.35),
+        transparent 65%
+    );
+
+    pointer-events: none;
+}
+
+/* Landing text */
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    color: var(--bone);
+    margin-bottom: 25px;
+}
+
+.hero-content h1 span {
+    display: block;
+    color: var(--tan);
+    font-style: italic;
+}
+
+.hero-description {
+    color: #E0DCCF;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+/* 5. EXPANDABLE ANIMAL DROPDOWN */
+
+.animal-dropdown {
+    width: 100%;
+    max-width: 480px;
+
+    border: 1px solid rgba(229, 215, 196, 0.4);
+    border-radius: 10px;
+
+    margin-bottom: 25px;
+    background: rgba(255, 255, 255, 0.05);
+
+    transition: var(--transition);
+}
+
+.animal-dropdown:hover {
+    border-color: var(--tan);
+}
+
+.animal-dropdown summary {
+    padding: 17px 20px;
+    cursor: pointer;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    list-style: none;
+}
+
+.animal-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Custom dropdown arrow */
+
+.animal-dropdown summary::after {
+    content: "+";
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--tan);
+    transition: transform 0.3s ease;
+}
+
+.animal-dropdown[open] summary::after {
+    content: "−";
+}
+
+.dropdown-content {
+    padding: 5px 20px 22px;
+    border-top: 1px solid rgba(229, 215, 196, 0.2);
+}
+
+.dropdown-content h3 {
+    font-size: 1.4rem;
+    color: var(--tan);
+    margin: 15px 0;
+}
+
+.dropdown-content p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    color: var(--bone);
+}
+
+/* 6. PRIMARY BUTTONS */
+
+.primary-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    padding: 16px 32px;
+    border: 2px solid var(--tan);
+    border-radius: 50px;
+
+    background: var(--tan);
+    color: var(--kombu-green);
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    transition: var(--transition);
+}
+
+.primary-btn:hover {
+    background: transparent;
+    color: var(--tan);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+/* Landing footer */
+
+.landing-footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--tan);
+}
+
+.landing-footer p {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* 7. HOMEPAGE HERO */
+
+#home-page {
+    background: var(--bone);
+    color: var(--dark);
+    animation: fadeIn 0.6s ease;
+}
+
+.home-hero {
+    min-height: 75vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 100px 7%;
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        var(--bone),
+        #D8D1B9
+    );
+}
+
+.home-hero h1 {
+    max-width: 850px;
+    color: var(--kombu-green);
+    margin-bottom: 25px;
+}
+
+.home-hero h1 span {
+    display: block;
+    color: var(--cafe-noir);
+    font-style: italic;
+}
+
+.home-hero > p:not(.eyebrow) {
+    max-width: 650px;
+    margin-bottom: 35px;
+    color: #4A4A3B;
+    font-size: 1.05rem;
+}
+
+.home-hero .primary-btn {
+    background: var(--kombu-green);
+    color: var(--bone);
+    border-color: var(--kombu-green);
+}
+
+.home-hero .primary-btn:hover {
+    background: transparent;
+    color: var(--kombu-green);
+}
+
+/* 8. SPECIES SECTION */
+
+.species-section {
+    padding: 110px 7%;
+    background: #F2EBDD;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-heading h2 {
+    color: var(--kombu-green);
+    margin-bottom: 20px;
+}
+
+.section-heading > p:last-child {
+    color: #5F6254;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* 9. ANIMAL FILTER BUTTONS */
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 45px;
+}
+
+.filter-btn {
+    padding: 11px 25px;
+
+    border: 1px solid var(--moss-green);
+    border-radius: 30px;
+
+    background: transparent;
+    color: var(--kombu-green);
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    transition: var(--transition);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--kombu-green);
+    color: var(--bone);
+    border-color: var(--kombu-green);
+}
+
+/* 10. ANIMAL CARDS */
+
+.animal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+
+    max-width: 1300px;
+    margin: auto;
+}
+
+.animal-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+
+    box-shadow: 0 8px 30px rgba(53, 64, 36, 0.08);
+    transition: var(--transition);
+}
+
+.animal-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(53, 64, 36, 0.15);
+}
+
+.animal-card img {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+
+    transition: transform 0.6s ease;
+}
+
+.animal-card:hover img {
+    transform: scale(1.04);
+}
+
+.card-content {
+    padding: 28px;
+}
+
+.status {
+    display: inline-block;
+
+    background: #E8EBD9;
+    color: var(--kombu-green);
+
+    padding: 6px 13px;
+    border-radius: 20px;
+
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    margin-bottom: 18px;
+}
+
+.card-content h3 {
+    color: var(--kombu-green);
+    margin-bottom: 8px;
+}
+
+.card-content p {
+    color: #6B6B61;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 22px;
+}
+
+.learn-more {
+    border: none;
+    background: none;
+
+    color: var(--cafe-noir);
+    font-weight: 700;
+    font-size: 0.95rem;
+
+    transition: var(--transition);
+}
+
+.learn-more:hover {
+    color: var(--moss-green);
+    transform: translateX(5px);
+}
+
+/* 11. ABOUT SECTION */
+
+.about-section {
+    padding: 120px 10%;
+    background: var(--bone);
+    text-align: center;
+}
+
+.about-section h2 {
+    color: var(--kombu-green);
+    margin-bottom: 30px;
+}
+
+.about-section > p:not(.eyebrow) {
+    max-width: 750px;
+    margin: 0 auto 22px;
+    color: #505346;
+    line-height: 2;
+}
+
+/* 12. TAKE ACTION SECTION */
+
+.action-section {
+    padding: 110px 7%;
+    background: var(--kombu-green);
+    color: var(--bone);
+    text-align: center;
+}
+
+.action-section h2 {
+    color: var(--bone);
+    margin-bottom: 55px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+
+    max-width: 1200px;
+    margin: auto;
+}
+
+.action-card {
+    padding: 45px 30px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(229, 215, 196, 0.2);
+    border-radius: 15px;
+
+    text-align: left;
+    transition: var(--transition);
+}
+
+.action-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-6px);
+}
+
+.action-card h3 {
+    color: var(--tan);
+    margin-bottom: 20px;
+}
+
+.action-card p {
+    color: #DEDACF;
+    font-size: 0.95rem;
+}
+
+/* 13. FOOTER */
+
+.site-footer {
+    padding: 65px 7% 35px;
+    text-align: center;
+
+    background: #28321C;
+    color: var(--bone);
+}
+
+.site-footer h2 {
+    font-family: var(--font-body);
+    font-size: 1.7rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.site-footer p {
+    font-size: 0.85rem;
+    color: var(--tan);
+    margin-bottom: 12px;
+}
+
+/* 14. ANIMAL INFORMATION MODAL */
+
+.animal-modal {
+    width: min(90%, 550px);
+    max-height: 85vh;
+    overflow-y: auto;
+
+    margin: auto;
+    padding: 0;
+
+    border: none;
+    border-radius: 18px;
+
+    background: var(--bone);
+    color: var(--dark);
+
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.3);
+}
+
+.animal-modal::backdrop {
+    background: rgba(20, 30, 15, 0.75);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    padding: 50px 40px;
+}
+
+.modal-content h2 {
+    color: var(--kombu-green);
+    margin-bottom: 25px;
+}
+
+.modal-content p {
+    margin-bottom: 15px;
+    color: #505346;
+    line-height: 1.8;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+
+    border: none;
+    background: transparent;
+
+    font-size: 2rem;
+    color: var(--kombu-green);
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--cafe-noir);
+    transform: rotate(90deg);
+}
+
+/* 15. ANIMATIONS */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content {
+    animation: fadeIn 0.9s ease both;
+}
+
+/* Keyboard accessibility */
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+    outline: 3px solid var(--moss-green);
+    outline-offset: 4px;
+}
+
+/* 16. TABLET RESPONSIVENESS */
+
+@media (max-width: 1024px) {
+
+    .landing-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 5%;
+    }
+
+    .hero-image {
+        height: 480px;
+    }
+
+    .animal-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .action-grid {
+        gap: 15px;
+    }
+
+    .action-card {
+        padding: 30px 25px;
+    }
+}
+
+/* 17. MOBILE RESPONSIVENESS */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 20px 5%;
+        min-height: 75px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .navbar nav {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .navbar nav a {
+        font-size: 0.8rem;
+    }
+
+    .landing-container {
+        grid-template-columns: 1fr;
+        padding: 20px 6% 60px;
+        gap: 35px;
+    }
+
+    .hero-image {
+        height: 360px;
+        border-radius: 14px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+    }
+
+    .animal-dropdown {
+        max-width: 100%;
+    }
+
+    .home-hero {
+        min-height: 65vh;
+        padding: 80px 6%;
+    }
+
+    .species-section,
+    .about-section,
+    .action-section {
+        padding: 75px 6%;
+    }
+
+    .animal-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+    }
+
+    .animal-card img {
+        height: 280px;
+    }
+
+    .action-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+    }
+
+    .action-card {
+        text-align: center;
+    }
+
+    .modal-content {
+        padding: 45px 25px 30px;
+    }
+}
+
+/* 18. SMALL PHONES */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .navbar nav {
+        justify-content: center;
+    }
+
+    .hero-image {
+        height: 290px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.4rem;
+    }
+
+    .primary-btn {
+        padding: 14px 26px;
+        font-size: 0.9rem;
+    }
+
+    .filter-btn {
+        padding: 9px 17px;
+        font-size: 0.8rem;
+    }
+
+    .card-content {
+        padding: 23px;
+    }
+}
+
+/* 19. REDUCED MOTION ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
