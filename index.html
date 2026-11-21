@@ -1,1 +1,459 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="WILDGUARD - Protect wildlife and preserve tomorrow.">
+
+    <title>WILDGUARD | Protect Wildlife</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- PAGE 1: GET STARTED       -->
+    <!-- ========================= -->
+
+    <section id="landing-page" class="page">
+
+        <header class="navbar">
+            <a href="#" class="logo">WILDGUARD<span>.</span></a>
+
+            <nav>
+                <a href="#about" id="about-link">About Us</a>
+            </nav>
+        </header>
+
+        <main class="landing-container">
+
+            <div class="hero-image">
+                <img
+                    src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=1600&q=85"
+                    alt="Tiger in its natural habitat">
+            </div>
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    DISCOVER • PROTECT • PRESERVE
+                </p>
+
+                <h1>
+                    Their Future Is
+                    <span>in Our Hands.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Every species has a story worth saving.
+                    Discover endangered wildlife, understand
+                    the threats they face, and learn how
+                    you can help protect their future.
+                </p>
+
+                <!-- Expandable Animal Information -->
+                <details class="animal-dropdown">
+
+                    <summary>
+                        Discover the Featured Animal
+                    </summary>
+
+                    <div class="dropdown-content">
+
+                        <h3>The Tiger</h3>
+
+                        <p>
+                            Scientific Name:
+                            <em>Panthera tigris</em>
+                        </p>
+
+                        <p>
+                            Conservation Status:
+                            Endangered
+                        </p>
+
+                        <p>
+                            Tigers are threatened by habitat
+                            loss, poaching, and declining
+                            prey populations.
+                        </p>
+
+                    </div>
+
+                </details>
+
+                <button
+                    type="button"
+                    id="get-started-btn"
+                    class="primary-btn">
+                    Get Started
+                    <span aria-hidden="true">→</span>
+                </button>
+
+            </div>
+
+        </main>
+
+        <footer class="landing-footer">
+            <p>
+                Protecting nature, one species at a time.
+            </p>
+        </footer>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- PAGE 2: HOMEPAGE          -->
+    <!-- ========================= -->
+
+    <section id="home-page" class="page" hidden>
+
+        <header class="navbar">
+
+            <a href="#" class="logo">
+                WILDGUARD<span>.</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#species">Species</a>
+                <a href="#about">About Us</a>
+                <a href="#action">Take Action</a>
+            </nav>
+
+        </header>
+
+
+        <!-- Homepage Introduction -->
+
+        <main>
+
+            <section id="home" class="home-hero">
+
+                <p class="eyebrow">
+                    WELCOME TO WILDGUARD
+                </p>
+
+                <h1>
+                    A World Worth
+                    <span>Protecting.</span>
+                </h1>
+
+                <p>
+                    Wildlife is an essential part of our
+                    planet's biodiversity. Together,
+                    we can raise awareness, protect
+                    endangered species, and inspire
+                    meaningful conservation efforts.
+                </p>
+
+                <a href="#species" class="primary-btn">
+                    Explore Wildlife →
+                </a>
+
+            </section>
+
+
+            <!-- Endangered Species -->
+
+            <section id="species" class="species-section">
+
+                <div class="section-heading">
+
+                    <p class="eyebrow">
+                        MEET THE WILDLIFE
+                    </p>
+
+                    <h2>Species Worth Saving</h2>
+
+                    <p>
+                        Discover some of the remarkable
+                        animals facing the threat
+                        of extinction.
+                    </p>
+
+                </div>
+
+
+                <!-- Animal Filter -->
+
+                <div class="filter-buttons"
+                     aria-label="Filter animal categories">
+
+                    <button type="button"
+                            class="filter-btn active"
+                            data-filter="all">
+                        All
+                    </button>
+
+                    <button type="button"
+                            class="filter-btn"
+                            data-filter="mammals">
+                        Mammals
+                    </button>
+
+                    <button type="button"
+                            class="filter-btn"
+                            data-filter="birds">
+                        Birds
+                    </button>
+
+                    <button type="button"
+                            class="filter-btn"
+                            data-filter="marine">
+                        Marine Life
+                    </button>
+
+                </div>
+
+
+                <!-- Animal Cards -->
+
+                <div class="animal-grid">
+
+                    <article class="animal-card"
+                             data-category="mammals">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=900&q=85"
+                            alt="Tiger">
+
+                        <div class="card-content">
+
+                            <span class="status">
+                                Endangered
+                            </span>
+
+                            <h3>Tiger</h3>
+
+                            <p>
+                                Panthera tigris
+                            </p>
+
+                            <button type="button"
+                                    class="learn-more"
+                                    data-animal="tiger">
+                                Learn More →
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="animal-card"
+                             data-category="birds">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?auto=format&fit=crop&w=900&q=85"
+                            alt="Bird in a forest">
+
+                        <div class="card-content">
+
+                            <span class="status">
+                                Critically Endangered
+                            </span>
+
+                            <h3>Philippine Eagle</h3>
+
+                            <p>
+                                Pithecophaga jefferyi
+                            </p>
+
+                            <button type="button"
+                                    class="learn-more"
+                                    data-animal="eagle">
+                                Learn More →
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="animal-card"
+                             data-category="marine">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1518467166778-b88f373ffec7?auto=format&fit=crop&w=900&q=85"
+                            alt="Sea turtle swimming underwater">
+
+                        <div class="card-content">
+
+                            <span class="status">
+                                Critically Endangered
+                            </span>
+
+                            <h3>Hawksbill Sea Turtle</h3>
+
+                            <p>
+                                Eretmochelys imbricata
+                            </p>
+
+                            <button type="button"
+                                    class="learn-more"
+                                    data-animal="turtle">
+                                Learn More →
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- About Us -->
+
+            <section id="about" class="about-section">
+
+                <p class="eyebrow">
+                    OUR PURPOSE
+                </p>
+
+                <h2>Why Wildlife Matters</h2>
+
+                <p>
+                    Every animal plays a role in
+                    maintaining the balance of nature.
+                    Protecting endangered species
+                    helps preserve ecosystems,
+                    biodiversity, and the natural
+                    world for future generations.
+                </p>
+
+                <p>
+                    WILDGUARD aims to educate,
+                    raise awareness, and encourage
+                    responsible actions that
+                    support wildlife conservation.
+                </p>
+
+            </section>
+
+
+            <!-- Take Action -->
+
+            <section id="action" class="action-section">
+
+                <p class="eyebrow">
+                    MAKE A DIFFERENCE
+                </p>
+
+                <h2>
+                    Small Actions.
+                    Lasting Impact.
+                </h2>
+
+                <div class="action-grid">
+
+                    <div class="action-card">
+                        <h3>01. Learn</h3>
+                        <p>
+                            Educate yourself about
+                            endangered species and
+                            their habitats.
+                        </p>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>02. Protect</h3>
+                        <p>
+                            Reduce waste, respect
+                            wildlife, and support
+                            habitat conservation.
+                        </p>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>03. Share</h3>
+                        <p>
+                            Spread awareness about
+                            wildlife conservation
+                            in your community.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- Footer -->
+
+        <footer class="site-footer">
+
+            <h2>WILDGUARD.</h2>
+
+            <p>
+                Protect Wildlife. Preserve Tomorrow.
+            </p>
+
+            <p>
+                © 2026 WILDGUARD.
+                Educational Conservation Project.
+            </p>
+
+        </footer>
+
+    </section>
+
+
+    <!-- Animal Information Popup -->
+
+    <dialog id="animal-modal" class="animal-modal">
+
+        <div class="modal-content">
+
+            <button type="button"
+                    id="close-modal"
+                    class="close-modal"
+                    aria-label="Close animal information">
+                &times;
+            </button>
+
+            <h2 id="modal-title"></h2>
+
+            <p id="modal-scientific"></p>
+
+            <p id="modal-status"></p>
+
+            <p id="modal-habitat"></p>
+
+            <p id="modal-threats"></p>
+
+            <p id="modal-description"></p>
+
+        </div>
+
+    </dialog>
+
+
+    <!-- JavaScript -->
+    <script src="script.js" defer></script>
+
+</body>
+</html>
+
