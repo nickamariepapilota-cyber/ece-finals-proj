@@ -19,7 +19,7 @@ const animals = [
     name: "Visayan Spotted Deer",
     scientific: "Rusa alfredi",
     status: "ENDANGERED",
-    image: "images/visayan-spotted-deer.jpeg",
+    image: "images/visayan-deer.jpeg",
     description:
       "One of the rarest deer species in the world. Its beautiful spotted coat makes it distinctive, while its survival depends on protecting the remaining forests of the Visayas.",
     habitat:
@@ -33,7 +33,7 @@ const animals = [
     name: "Visayan Warty Pig",
     scientific: "Sus cebifrons",
     status: "CRITICALLY ENDANGERED",
-    image: "images/visayan-warty-pig.jpeg",
+    image: "images/visayan-pig.jpeg",
     description:
       "An extraordinary wild pig native to the Visayas. Recognized for its unusual appearance, this species is threatened by the loss of its forest home.",
     habitat:
