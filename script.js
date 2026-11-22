@@ -74,7 +74,7 @@ const animals = [
     name: "Panay Monitor Lizard / Mabitang",
     scientific: "Varanus mabitang",
     status: "ENDANGERED",
-    image: "Panay Monitor Lizard.jpg",
+    image: "images/Panay Monitor Lizard.jpg",
     description:
       "The Panay Monitor Lizard, or Mabitang, is a rare, largely fruit-eating, tree-dwelling monitor lizard endemic to Panay's forests. Unlike many monitor lizards that are strictly carnivorous, Varanus mabitang feeds heavily on forest fruits.",
     habitat:
