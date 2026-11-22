@@ -5,277 +5,147 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Discover and protect endangered wildlife in the Visayas, Philippines.">
-  <title>The Wild Heart of the Visayas</title>
+  <title>WildVisayas | Protect Our Wildlife</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
-
 <body>
-  <!-- NAVIGATION -->
-  <header class="site-header">
+
+  <header class="navbar">
     <a href="#home" class="logo">
-      <span class="logo-icon">✳</span>
-      <span>WILD<span class="logo-accent">VISAYAS</span></span>
+      <span class="logo-icon">✳</span> WildVisayas
     </a>
 
-    <button class="menu-toggle"
+    <button class="menu-toggle" id="menuToggle"
       aria-label="Toggle navigation"
       aria-expanded="false">☰</button>
 
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#home" class="active">Home</a>
-      <a href="#about">Our Mission</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
       <a href="#wildlife">Wildlife</a>
-      <a href="#action">Take Action</a>
+      <a href="#mission">Our Mission</a>
+      <a href="#action" class="nav-cta">Take Action ↗</a>
     </nav>
   </header>
 
   <main>
-    <!-- LANDING PAGE CAROUSEL -->
-    <section id="home" class="hero" aria-label="Featured wildlife">
-
-      <div class="hero-slides">
-        <div class="hero-slide active"
-          data-animal="deer">
-          <img src="images/visayan-deer.jpg"
-            alt="Visayan spotted deer in its forest habitat">
-        </div>
-
-        <div class="hero-slide" data-animal="pig">
-          <img src="images/warty-pig.jpg"
-            alt="Visayan warty pig">
-        </div>
-
-        <div class="hero-slide" data-animal="dulungan">
-          <img src="images/dulungan.jpg"
-            alt="Walden's hornbill">
-        </div>
-
-        <div class="hero-slide" data-animal="pigeon">
-          <img src="images/bleeding-heart.jpg"
-            alt="Negros bleeding-heart pigeon">
-        </div>
-
-        <div class="hero-slide" data-animal="hornbill">
-          <img src="images/visayan-hornbill.jpg"
-            alt="Visayan hornbill">
-        </div>
-      </div>
-
-      <div class="hero-overlay"></div>
-
+    <section class="hero" id="home">
       <div class="hero-content">
-        <p class="eyebrow">DISCOVER • PROTECT • PRESERVE</p>
-
-        <h1>
-          The Wild Heart<br>
-          <em>of the Visayas.</em>
-        </h1>
-
-        <p class="hero-description">
-          Hidden within our islands are extraordinary
-          creatures fighting for survival.
-          Discover their stories and help protect
-          the wildlife that makes the Visayas unique.
-        </p>
-
-        <a href="#wildlife" class="btn btn-primary">
-          Explore Wildlife <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-
-      <div class="hero-bottom">
-        <div class="slide-info" aria-live="polite">
-          <span class="slide-label">FEATURED SPECIES</span>
-          <h2 id="featured-name">Visayan Spotted Deer</h2>
-          <p id="featured-location">Panay & Negros</p>
-        </div>
-
-        <div class="carousel-controls">
-          <span id="slide-counter">01 / 05</span>
-
-          <button id="prev-slide"
-            aria-label="Previous animal">←</button>
-
-          <button id="next-slide"
-            aria-label="Next animal">→</button>
-        </div>
-      </div>
-
-      <div class="carousel-dots" aria-label="Choose featured animal">
-        <button class="dot active" data-slide="0"
-          aria-label="Show Visayan spotted deer"></button>
-        <button class="dot" data-slide="1"
-          aria-label="Show Visayan warty pig"></button>
-        <button class="dot" data-slide="2"
-          aria-label="Show Walden's hornbill"></button>
-        <button class="dot" data-slide="3"
-          aria-label="Show Negros bleeding-heart pigeon"></button>
-        <button class="dot" data-slide="4"
-          aria-label="Show Visayan hornbill"></button>
-      </div>
-    </section>
-
-    <!-- MISSION SECTION -->
-    <section id="about" class="section about-section">
-      <div class="section-heading">
-        <p class="eyebrow">OUR PURPOSE</p>
-        <h2>Protecting what makes<br>
-          <em>our islands alive.</em>
-        </h2>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            The Visayas is home to remarkable wildlife
-            found nowhere else on Earth. Yet habitat loss,
-            hunting, and human activities threaten the
-            survival of many native species.
-          </p>
-          <p>
-            WildVisayas is an educational initiative
-            dedicated to raising awareness, encouraging
-            conservation, and inspiring communities
-            to protect our natural heritage.
-          </p>
-        </div>
-
-        <div class="mission-card">
-          <span class="card-symbol">✳</span>
-          <h3>Our Mission</h3>
-          <p>
-            To inspire a generation that understands,
-            values, and protects the endangered
-            wildlife of the Visayan islands.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- WILDLIFE EXPLORER -->
-    <section id="wildlife" class="section wildlife-section">
-      <div class="section-heading">
-        <p class="eyebrow">MEET OUR WILDLIFE</p>
-        <h2>Rare. Remarkable.<br><em>Worth Protecting.</em></h2>
+        <span class="eyebrow">THE WILD IS WORTH SAVING</span>
+        <h1>Every species has a <em>story.</em><br>
+          Every story deserves a <em>future.</em></h1>
         <p>
-          Select an animal to discover its story,
-          habitat, conservation status, and threats.
+          Discover the remarkable wildlife of the Visayas.
+          Learn their stories, understand their struggles,
+          and become part of their protection.
         </p>
+        <a href="#wildlife" class="primary-btn">
+          Get Started <span>↗</span>
+        </a>
+        <div class="hero-footnote">
+          <span class="pulse-dot"></span>
+          Protecting biodiversity, one story at a time.
+        </div>
       </div>
 
-      <div class="wildlife-explorer">
-        <div class="animal-selector">
-          <label for="animal-select">CHOOSE A SPECIES</label>
-          <select id="animal-select">
-            <option value="deer">Visayan Spotted Deer</option>
-            <option value="pig">Visayan Warty Pig</option>
-            <option value="dulungan">Walden's Hornbill</option>
-            <option value="pigeon">Negros Bleeding-heart Pigeon</option>
-            <option value="hornbill">Visayan Hornbill</option>
-          </select>
-        </div>
-
-        <div class="animal-feature">
-          <div class="animal-image-wrap">
-            <img id="animal-image"
-              src="images/visayan-deer.jpg"
-              alt="Visayan spotted deer">
-          </div>
-
-          <div class="animal-details" aria-live="polite">
-            <span id="animal-status" class="status-badge">
-              Endangered
-            </span>
-
-            <h3 id="animal-name">Visayan Spotted Deer</h3>
-
-            <p id="animal-scientific" class="scientific-name">
-              Rusa alfredi
-            </p>
-
-            <p id="animal-description">
-              A rare forest deer known for its distinctive
-              white-spotted coat, native to the Visayan islands.
-            </p>
-
-            <div class="animal-facts">
-              <div>
-                <span class="fact-label">NATIVE HABITAT</span>
-                <p id="animal-habitat">Panay and Negros forests</p>
-              </div>
-
-              <div>
-                <span class="fact-label">MAJOR THREATS</span>
-                <p id="animal-threats">Hunting and habitat loss</p>
-              </div>
-            </div>
-
-            <div class="animal-fact-box">
-              <span class="fact-label">DID YOU KNOW?</span>
-              <p id="animal-funfact">
-                The Visayan spotted deer is one of the
-                rarest deer species in the world.
-              </p>
-            </div>
-          </div>
+      <div class="hero-art">
+        <div class="hero-image"></div>
+        <div class="hero-image-label">
+          <span>FEATURED WILDLIFE</span>
+          <strong>Visayan Hornbill</strong>
+          <small>Penelopides panini</small>
         </div>
       </div>
     </section>
 
-    <!-- TAKE ACTION -->
-    <section id="action" class="section action-section">
-      <p class="eyebrow">THE FUTURE STARTS WITH US</p>
-      <h2>Small Actions.<br><em>Lasting Impact.</em></h2>
-      <p>
-        Protecting endangered wildlife begins with awareness.
-        Every informed choice helps create a better future
-        for our islands.
-      </p>
-
-      <div class="action-grid">
-        <article class="action-card">
-          <span class="action-icon">01</span>
-          <h3>Learn & Share</h3>
-          <p>
-            Spread awareness about threatened Visayan
-            species and their habitats.
-          </p>
-        </article>
-
-        <article class="action-card">
-          <span class="action-icon">02</span>
-          <h3>Protect Habitats</h3>
-          <p>
-            Support responsible conservation and
-            local forest protection efforts.
-          </p>
-        </article>
-
-        <article class="action-card">
-          <span class="action-icon">03</span>
-          <h3>Respect Wildlife</h3>
-          <p>
-            Never purchase illegally captured wildlife
-            or products made from threatened species.
-          </p>
-        </article>
+    <section class="wildlife-section" id="wildlife">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">MEET THE WILDLIFE</span>
+          <h2>Faces of the <em>forest.</em></h2>
+          <p>Explore some of the extraordinary animals that need our protection.</p>
+        </div>
+        <div class="carousel-controls">
+          <button id="prevBtn" aria-label="Previous animal">←</button>
+          <button id="nextBtn" aria-label="Next animal">→</button>
+        </div>
       </div>
+
+      <div class="animal-card">
+        <div class="animal-image-wrapper">
+          <img id="animalImage"
+            src="images/visayan-hornbill.jpeg"
+            alt="Visayan Hornbill">
+          <span class="image-tag">VISAYAS · PHILIPPINES</span>
+        </div>
+
+        <div class="animal-content">
+          <span class="animal-number" id="animalNumber">01 / 03</span>
+          <span class="status" id="animalStatus">ENDANGERED</span>
+          <h3 id="animalName">Visayan Hornbill</h3>
+          <p class="scientific-name" id="scientificName">
+            Penelopides panini
+          </p>
+          <p class="animal-description" id="animalDescription"></p>
+
+          <button class="learn-btn" id="learnMoreBtn"
+            aria-expanded="false"
+            aria-controls="animalDetails">
+            Discover their story <span id="expandIcon">＋</span>
+          </button>
+
+          <div class="animal-details" id="animalDetails" hidden>
+            <h4>Habitat</h4>
+            <p id="animalHabitat"></p>
+            <h4>Threats</h4>
+            <p id="animalThreats"></p>
+            <h4>Why they matter</h4>
+            <p id="animalImportance"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-dots" id="carouselDots"
+        aria-label="Choose featured animal"></div>
+    </section>
+
+    <section class="mission-section" id="mission">
+      <div class="mission-label">
+        <span class="eyebrow">OUR PURPOSE</span>
+        <h2>Nature needs<br><em>our voices.</em></h2>
+      </div>
+      <div class="mission-content">
+        <p>
+          The Visayas is home to wildlife found nowhere else
+          on Earth. Yet habitat destruction, hunting, and
+          other human pressures threaten their survival.
+        </p>
+        <p>
+          WildVisayas exists to inspire awareness, appreciation,
+          and responsible action for endangered species.
+          Because protecting nature begins with understanding it.
+        </p>
+      </div>
+    </section>
+
+    <section class="action-section" id="action">
+      <span class="eyebrow">BE PART OF THE CHANGE</span>
+      <h2>Small actions.<br><em>Lasting impact.</em></h2>
+      <p>
+        Share what you learn, respect wildlife habitats,
+        support conservation organizations, and inspire
+        others to care.
+      </p>
+      <a href="#wildlife" class="light-btn">Explore Wildlife ↗</a>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <a href="#home" class="logo">
-      ✳ WILD<span class="logo-accent">VISAYAS</span>
-    </a>
-
-    <p>
-      Celebrating and protecting the wildlife
-      of the Visayan islands.
-    </p>
-
-    <small>© 2026 WildVisayas • Educational Conservation Project</small>
+  <footer>
+    <strong>✳ WildVisayas</strong>
+    <span>For the wild. For the future.</span>
+    <small>Educational conservation awareness project · 2026</small>
   </footer>
+
 </body>
 </html>
+
