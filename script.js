@@ -84,10 +84,11 @@ const animals = [
     importance:
       "As a fruit-eating arboreal species, it helps disperse seeds from forest fruits and supports ecological balance in Panay's forests."
   },
-  name: "Philippine Tarsier",
+  {
+    name: "Philippine Tarsier",
     scientific: "Carlito syrichta",
     status: "NEAR THREATENED",
-    image: "images/ph-tarsiers.jpeg",
+    image: "images/philippine-tarsier.jpeg",
     description:
       "The Philippine Tarsier is a small primate found in parts of the Visayas such as Bohol, Samar, and Leyte, as well as Mindanao. While famous in eco-tourism, it is highly sensitive to environmental changes.",
     habitat:
