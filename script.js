@@ -88,7 +88,7 @@ const animals = [
     name: "Philippine Tarsier",
     scientific: "Carlito syrichta",
     status: "NEAR THREATENED",
-    image: "images/ph-tarsiers.jpegg",
+    image: "images/ph-tarsiers.jpeg",
     description:
       "The Philippine Tarsier is a small primate found in parts of the Visayas such as Bohol, Samar, and Leyte, as well as Mindanao. While famous in eco-tourism, it is highly sensitive to environmental changes.",
     habitat:
