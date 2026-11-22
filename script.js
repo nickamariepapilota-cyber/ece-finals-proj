@@ -83,6 +83,19 @@ const animals = [
       "Habitat loss, forest fragmentation, and hunting threaten its limited population.",
     importance:
       "As a fruit-eating arboreal species, it helps disperse seeds from forest fruits and supports ecological balance in Panay's forests."
+  },
+  name: "Philippine Tarsier",
+    scientific: "Carlito syrichta",
+    status: "NEAR THREATENED",
+    image: "images/ph-tarsiers.jpeg",
+    description:
+      "The Philippine Tarsier is a small primate found in parts of the Visayas such as Bohol, Samar, and Leyte, as well as Mindanao. While famous in eco-tourism, it is highly sensitive to environmental changes.",
+    habitat:
+      "Dense secondary growth, bamboo thickets, bushes, and forest edges in parts of the Visayas (including Bohol, Samar, and Leyte) and Mindanao.",
+    threats:
+      "Habitat fragmentation, human disturbance, and improper captivity threaten wild populations.",
+    importance:
+      "As an insectivorous primate, it helps keep insect populations in check within local forest and shrubland ecosystems."
   }
 ];
 
