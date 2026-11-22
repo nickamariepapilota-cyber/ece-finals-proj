@@ -1,284 +1,141 @@
 
-/* =========================================
-   WILDGUARD - JAVASCRIPT
-   Wildlife Conservation Website
-========================================= */
 
-// 1. SELECT HTML ELEMENTS
+const animals = [
+  {
+    name: "Visayan Hornbill",
+    scientific: "Penelopides panini",
+    status: "ENDANGERED",
+    image: "images/visayan-hornbill.jpeg",
+    description:
+      "A remarkable forest bird native to the Western Visayas. Known for its distinctive bill and important role in spreading seeds, the Visayan Hornbill helps forests regenerate.",
+    habitat:
+      "Forested areas of Panay and Negros, particularly remaining native forests.",
+    threats:
+      "Habitat loss, forest fragmentation, and hunting.",
+    importance:
+      "As a fruit-eating bird, it disperses seeds and contributes to forest regeneration."
+  },
+  {
+    name: "Visayan Spotted Deer",
+    scientific: "Rusa alfredi",
+    status: "ENDANGERED",
+    image: "images/visayan-spotted-deer.jpeg",
+    description:
+      "One of the rarest deer species in the world. Its beautiful spotted coat makes it distinctive, while its survival depends on protecting the remaining forests of the Visayas.",
+    habitat:
+      "Remaining forest habitats on Panay and Negros.",
+    threats:
+      "Habitat destruction, forest fragmentation, and illegal hunting.",
+    importance:
+      "This native herbivore is part of the forest food web and helps maintain ecological relationships."
+  },
+  {
+    name: "Visayan Warty Pig",
+    scientific: "Sus cebifrons",
+    status: "CRITICALLY ENDANGERED",
+    image: "images/visayan-warty-pig.jpeg",
+    description:
+      "An extraordinary wild pig native to the Visayas. Recognized for its unusual appearance, this species is threatened by the loss of its forest home.",
+    habitat:
+      "Remaining forest habitats, particularly on Panay and Negros.",
+    threats:
+      "Habitat loss, hunting, and hybridization with domestic pigs.",
+    importance:
+      "Its natural foraging and soil disturbance can influence soil processes and plant regeneration."
+  }
+];
 
-const landingPage = document.getElementById("landing-page");
-const homePage = document.getElementById("home-page");
+let currentIndex = 0;
 
-const getStartedBtn = document.getElementById("get-started-btn");
+const animalImage = document.getElementById("animalImage");
+const animalName = document.getElementById("animalName");
+const scientificName = document.getElementById("scientificName");
+const animalStatus = document.getElementById("animalStatus");
+const animalNumber = document.getElementById("animalNumber");
+const animalDescription = document.getElementById("animalDescription");
+const animalHabitat = document.getElementById("animalHabitat");
+const animalThreats = document.getElementById("animalThreats");
+const animalImportance = document.getElementById("animalImportance");
+const animalDetails = document.getElementById("animalDetails");
+const learnMoreBtn = document.getElementById("learnMoreBtn");
+const expandIcon = document.getElementById("expandIcon");
+const dotsContainer = document.getElementById("carouselDots");
 
-const filterButtons = document.querySelectorAll(".filter-btn");
-const animalCards = document.querySelectorAll(".animal-card");
+function showAnimal(index) {
+  currentIndex = (index + animals.length) % animals.length;
+  const animal = animals[currentIndex];
 
-const learnMoreButtons = document.querySelectorAll(".learn-more");
+  animalImage.src = animal.image;
+  animalImage.alt = animal.name;
+  animalName.textContent = animal.name;
+  scientificName.textContent = animal.scientific;
+  animalStatus.textContent = animal.status;
+  animalNumber.textContent =
+    String(currentIndex + 1).padStart(2, "0") +
+    " / " +
+    String(animals.length).padStart(2, "0");
 
-const animalModal = document.getElementById("animal-modal");
-const closeModalBtn = document.getElementById("close-modal");
+  animalDescription.textContent = animal.description;
+  animalHabitat.textContent = animal.habitat;
+  animalThreats.textContent = animal.threats;
+  animalImportance.textContent = animal.importance;
 
+  // Close the information dropdown when changing animals.
+  animalDetails.hidden = true;
+  learnMoreBtn.setAttribute("aria-expanded", "false");
+  expandIcon.textContent = "＋";
 
-// 2. ANIMAL INFORMATION DATABASE
-
-const animals = {
-
-    tiger: {
-        name: "Tiger",
-        scientific: "Panthera tigris",
-        status: "Endangered",
-        habitat: "Forests, grasslands, and wetlands across Asia",
-        threats: "Poaching, habitat loss, and declining prey populations",
-        description:
-            "Tigers are the largest living wild cats. " +
-            "They play an important role in maintaining " +
-            "healthy ecosystems by regulating prey populations. " +
-            "Conservation efforts focus on protecting habitats, " +
-            "preventing poaching, and reducing human-wildlife conflict."
-    },
-
-    eagle: {
-        name: "Philippine Eagle",
-        scientific: "Pithecophaga jefferyi",
-        status: "Critically Endangered",
-        habitat: "Tropical forests of the Philippines",
-        threats: "Deforestation, hunting, and habitat fragmentation",
-        description:
-            "The Philippine eagle is one of the world's " +
-            "largest forest eagles and is endemic to the Philippines. " +
-            "It is an important symbol of the country's biodiversity. " +
-            "Conservation efforts include forest protection, " +
-            "nest monitoring, and community education."
-    },
-
-    turtle: {
-        name: "Hawksbill Sea Turtle",
-        scientific: "Eretmochelys imbricata",
-        status: "Critically Endangered",
-        habitat: "Tropical coral reefs and coastal waters",
-        threats: "Illegal wildlife trade, fishing bycatch, " +
-                 "marine pollution, and habitat degradation",
-        description:
-            "Hawksbill sea turtles help maintain healthy " +
-            "coral reef ecosystems by feeding on sponges. " +
-            "Their populations are threatened by illegal " +
-            "trade and accidental capture in fishing gear. " +
-            "Protecting nesting beaches and coral reefs " +
-            "is essential for their survival."
-    }
-
-};
-
-
-// 3. GET STARTED BUTTON
-
-getStartedBtn.addEventListener("click", function () {
-
-    // Hide landing page
-    landingPage.hidden = true;
-
-    // Display homepage
-    homePage.hidden = false;
-
-    // Scroll to top
-    window.scrollTo({
-        top: 0,
-        behavior: "instant"
-    });
-
-    // Update browser title
-    document.title = "WILDGUARD | Home";
-
-});
-
-
-// 4. ANIMAL CATEGORY FILTER
-
-filterButtons.forEach(function (button) {
-
-    button.addEventListener("click", function () {
-
-        // Get selected category
-        const selectedCategory = button.dataset.filter;
-
-        // Remove active class from all buttons
-        filterButtons.forEach(function (btn) {
-            btn.classList.remove("active");
-        });
-
-        // Highlight selected button
-        button.classList.add("active");
-
-        // Filter animal cards
-        animalCards.forEach(function (card) {
-
-            const animalCategory = card.dataset.category;
-
-            if (
-                selectedCategory === "all" ||
-                selectedCategory === animalCategory
-            ) {
-                card.hidden = false;
-            } else {
-                card.hidden = true;
-            }
-
-        });
-
-    });
-
-});
-
-
-// 5. DISPLAY ANIMAL INFORMATION
-
-function showAnimalInformation(animalKey) {
-
-    const animal = animals[animalKey];
-
-    // Stop if animal does not exist
-    if (!animal) {
-        return;
-    }
-
-    // Insert animal information into popup
-    document.getElementById("modal-title").textContent =
-        animal.name;
-
-    document.getElementById("modal-scientific").textContent =
-        "Scientific Name: " + animal.scientific;
-
-    document.getElementById("modal-status").textContent =
-        "Conservation Status: " + animal.status;
-
-    document.getElementById("modal-habitat").textContent =
-        "Habitat: " + animal.habitat;
-
-    document.getElementById("modal-threats").textContent =
-        "Major Threats: " + animal.threats;
-
-    document.getElementById("modal-description").textContent =
-        animal.description;
-
-    // Open popup
-    animalModal.showModal();
-
+  updateDots();
 }
 
+function updateDots() {
+  dotsContainer.innerHTML = "";
 
-// 6. LEARN MORE BUTTONS
+  animals.forEach((animal, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", "Show " + animal.name);
 
-learnMoreButtons.forEach(function (button) {
-
-    button.addEventListener("click", function () {
-
-        const animalKey = button.dataset.animal;
-
-        showAnimalInformation(animalKey);
-
-    });
-
-});
-
-
-// 7. CLOSE ANIMAL POPUP
-
-closeModalBtn.addEventListener("click", function () {
-
-    animalModal.close();
-
-});
-
-
-// 8. CLOSE POPUP WHEN CLICKING OUTSIDE
-
-animalModal.addEventListener("click", function (event) {
-
-    if (event.target === animalModal) {
-        animalModal.close();
+    if (index === currentIndex) {
+      dot.classList.add("active");
+      dot.setAttribute("aria-current", "true");
     }
 
-});
-
-
-// 9. NAVIGATION BETWEEN PAGES
-
-const navigationLinks = document.querySelectorAll(
-    'a[href="#home"], a[href="#species"], ' +
-    'a[href="#about"], a[href="#action"]'
-);
-
-navigationLinks.forEach(function (link) {
-
-    link.addEventListener("click", function (event) {
-
-        const targetId = link.getAttribute("href");
-        const targetSection = document.querySelector(targetId);
-
-        if (!targetSection) {
-            return;
-        }
-
-        event.preventDefault();
-
-        // Switch to homepage if currently on landing page
-        if (homePage.hidden) {
-
-            landingPage.hidden = true;
-            homePage.hidden = false;
-
-            document.title = "WILDGUARD | Home";
-
-        }
-
-        // Navigate to selected section
-        targetSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    });
-
-});
-
-
-// 10. LOGO NAVIGATION
-
-const logoLinks = document.querySelectorAll(".logo");
-
-logoLinks.forEach(function (logo) {
-
-    logo.addEventListener("click", function (event) {
-
-        event.preventDefault();
-
-        // Return to landing page
-        homePage.hidden = true;
-        landingPage.hidden = false;
-
-        document.title = "WILDGUARD | Protect Wildlife";
-
-        window.scrollTo({
-            top: 0,
-            behavior: "instant"
-        });
-
-    });
-
-});
-
-
-// 11. INITIAL WEBSITE STATE
-
-function initializeWebsite() {
-
-    landingPage.hidden = false;
-    homePage.hidden = true;
-
-    document.title = "WILDGUARD | Protect Wildlife";
-
+    dot.addEventListener("click", () => showAnimal(index));
+    dotsContainer.appendChild(dot);
+  });
 }
 
-initializeWebsite();
+document.getElementById("nextBtn").addEventListener("click", () => {
+  showAnimal(currentIndex + 1);
+});
 
+document.getElementById("prevBtn").addEventListener("click", () => {
+  showAnimal(currentIndex - 1);
+});
+
+learnMoreBtn.addEventListener("click", () => {
+  const willOpen = animalDetails.hidden;
+  animalDetails.hidden = !willOpen;
+  learnMoreBtn.setAttribute("aria-expanded", String(willOpen));
+  expandIcon.textContent = willOpen ? "−" : "＋";
+});
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.textContent = "☰";
+  });
+});
+
+showAnimal(0);
