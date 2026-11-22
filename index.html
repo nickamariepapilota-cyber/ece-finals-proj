@@ -2,458 +2,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="WILDGUARD - Protect wildlife and preserve tomorrow.">
-
-    <title>WILDGUARD | Protect Wildlife</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
-          rel="stylesheet">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover and protect endangered wildlife in the Visayas, Philippines.">
+  <title>The Wild Heart of the Visayas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-
-    <!-- ========================= -->
-    <!-- PAGE 1: GET STARTED       -->
-    <!-- ========================= -->
-
-    <section id="landing-page" class="page">
-
-        <header class="navbar">
-            <a href="#" class="logo">WILDGUARD<span>.</span></a>
-
-            <nav>
-                <a href="#about" id="about-link">About Us</a>
-            </nav>
-        </header>
-
-        <main class="landing-container">
-
-            <div class="hero-image">
-                <img
-                    src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=1600&q=85"
-                    alt="Tiger in its natural habitat">
-            </div>
-
-            <div class="hero-content">
-
-                <p class="eyebrow">
-                    DISCOVER • PROTECT • PRESERVE
-                </p>
-
-                <h1>
-                    Their Future Is
-                    <span>in Our Hands.</span>
-                </h1>
-
-                <p class="hero-description">
-                    Every species has a story worth saving.
-                    Discover endangered wildlife, understand
-                    the threats they face, and learn how
-                    you can help protect their future.
-                </p>
-
-                <!-- Expandable Animal Information -->
-                <details class="animal-dropdown">
-
-                    <summary>
-                        Discover the Featured Animal
-                    </summary>
-
-                    <div class="dropdown-content">
-
-                        <h3>The Tiger</h3>
-
-                        <p>
-                            Scientific Name:
-                            <em>Panthera tigris</em>
-                        </p>
-
-                        <p>
-                            Conservation Status:
-                            Endangered
-                        </p>
-
-                        <p>
-                            Tigers are threatened by habitat
-                            loss, poaching, and declining
-                            prey populations.
-                        </p>
-
-                    </div>
-
-                </details>
-
-                <button
-                    type="button"
-                    id="get-started-btn"
-                    class="primary-btn">
-                    Get Started
-                    <span aria-hidden="true">→</span>
-                </button>
-
-            </div>
-
-        </main>
-
-        <footer class="landing-footer">
-            <p>
-                Protecting nature, one species at a time.
-            </p>
-        </footer>
-
-    </section>
-
-
-    <!-- ========================= -->
-    <!-- PAGE 2: HOMEPAGE          -->
-    <!-- ========================= -->
-
-    <section id="home-page" class="page" hidden>
-
-        <header class="navbar">
-
-            <a href="#" class="logo">
-                WILDGUARD<span>.</span>
-            </a>
-
-            <nav class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#species">Species</a>
-                <a href="#about">About Us</a>
-                <a href="#action">Take Action</a>
-            </nav>
-
-        </header>
-
-
-        <!-- Homepage Introduction -->
-
-        <main>
-
-            <section id="home" class="home-hero">
-
-                <p class="eyebrow">
-                    WELCOME TO WILDGUARD
-                </p>
-
-                <h1>
-                    A World Worth
-                    <span>Protecting.</span>
-                </h1>
-
-                <p>
-                    Wildlife is an essential part of our
-                    planet's biodiversity. Together,
-                    we can raise awareness, protect
-                    endangered species, and inspire
-                    meaningful conservation efforts.
-                </p>
-
-                <a href="#species" class="primary-btn">
-                    Explore Wildlife →
-                </a>
-
-            </section>
-
-
-            <!-- Endangered Species -->
-
-            <section id="species" class="species-section">
-
-                <div class="section-heading">
-
-                    <p class="eyebrow">
-                        MEET THE WILDLIFE
-                    </p>
-
-                    <h2>Species Worth Saving</h2>
-
-                    <p>
-                        Discover some of the remarkable
-                        animals facing the threat
-                        of extinction.
-                    </p>
-
-                </div>
-
-
-                <!-- Animal Filter -->
-
-                <div class="filter-buttons"
-                     aria-label="Filter animal categories">
-
-                    <button type="button"
-                            class="filter-btn active"
-                            data-filter="all">
-                        All
-                    </button>
-
-                    <button type="button"
-                            class="filter-btn"
-                            data-filter="mammals">
-                        Mammals
-                    </button>
-
-                    <button type="button"
-                            class="filter-btn"
-                            data-filter="birds">
-                        Birds
-                    </button>
-
-                    <button type="button"
-                            class="filter-btn"
-                            data-filter="marine">
-                        Marine Life
-                    </button>
-
-                </div>
-
-
-                <!-- Animal Cards -->
-
-                <div class="animal-grid">
-
-                    <article class="animal-card"
-                             data-category="mammals">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=900&q=85"
-                            alt="Tiger">
-
-                        <div class="card-content">
-
-                            <span class="status">
-                                Endangered
-                            </span>
-
-                            <h3>Tiger</h3>
-
-                            <p>
-                                Panthera tigris
-                            </p>
-
-                            <button type="button"
-                                    class="learn-more"
-                                    data-animal="tiger">
-                                Learn More →
-                            </button>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="animal-card"
-                             data-category="birds">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?auto=format&fit=crop&w=900&q=85"
-                            alt="Bird in a forest">
-
-                        <div class="card-content">
-
-                            <span class="status">
-                                Critically Endangered
-                            </span>
-
-                            <h3>Philippine Eagle</h3>
-
-                            <p>
-                                Pithecophaga jefferyi
-                            </p>
-
-                            <button type="button"
-                                    class="learn-more"
-                                    data-animal="eagle">
-                                Learn More →
-                            </button>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="animal-card"
-                             data-category="marine">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1518467166778-b88f373ffec7?auto=format&fit=crop&w=900&q=85"
-                            alt="Sea turtle swimming underwater">
-
-                        <div class="card-content">
-
-                            <span class="status">
-                                Critically Endangered
-                            </span>
-
-                            <h3>Hawksbill Sea Turtle</h3>
-
-                            <p>
-                                Eretmochelys imbricata
-                            </p>
-
-                            <button type="button"
-                                    class="learn-more"
-                                    data-animal="turtle">
-                                Learn More →
-                            </button>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </section>
-
-
-            <!-- About Us -->
-
-            <section id="about" class="about-section">
-
-                <p class="eyebrow">
-                    OUR PURPOSE
-                </p>
-
-                <h2>Why Wildlife Matters</h2>
-
-                <p>
-                    Every animal plays a role in
-                    maintaining the balance of nature.
-                    Protecting endangered species
-                    helps preserve ecosystems,
-                    biodiversity, and the natural
-                    world for future generations.
-                </p>
-
-                <p>
-                    WILDGUARD aims to educate,
-                    raise awareness, and encourage
-                    responsible actions that
-                    support wildlife conservation.
-                </p>
-
-            </section>
-
-
-            <!-- Take Action -->
-
-            <section id="action" class="action-section">
-
-                <p class="eyebrow">
-                    MAKE A DIFFERENCE
-                </p>
-
-                <h2>
-                    Small Actions.
-                    Lasting Impact.
-                </h2>
-
-                <div class="action-grid">
-
-                    <div class="action-card">
-                        <h3>01. Learn</h3>
-                        <p>
-                            Educate yourself about
-                            endangered species and
-                            their habitats.
-                        </p>
-                    </div>
-
-                    <div class="action-card">
-                        <h3>02. Protect</h3>
-                        <p>
-                            Reduce waste, respect
-                            wildlife, and support
-                            habitat conservation.
-                        </p>
-                    </div>
-
-                    <div class="action-card">
-                        <h3>03. Share</h3>
-                        <p>
-                            Spread awareness about
-                            wildlife conservation
-                            in your community.
-                        </p>
-                    </div>
-
-                </div>
-
-            </section>
-
-        </main>
-
-
-        <!-- Footer -->
-
-        <footer class="site-footer">
-
-            <h2>WILDGUARD.</h2>
-
-            <p>
-                Protect Wildlife. Preserve Tomorrow.
-            </p>
-
-            <p>
-                © 2026 WILDGUARD.
-                Educational Conservation Project.
-            </p>
-
-        </footer>
-
-    </section>
-
-
-    <!-- Animal Information Popup -->
-
-    <dialog id="animal-modal" class="animal-modal">
-
-        <div class="modal-content">
-
-            <button type="button"
-                    id="close-modal"
-                    class="close-modal"
-                    aria-label="Close animal information">
-                &times;
-            </button>
-
-            <h2 id="modal-title"></h2>
-
-            <p id="modal-scientific"></p>
-
-            <p id="modal-status"></p>
-
-            <p id="modal-habitat"></p>
-
-            <p id="modal-threats"></p>
-
-            <p id="modal-description"></p>
-
+  <!-- NAVIGATION -->
+  <header class="site-header">
+    <a href="#home" class="logo">
+      <span class="logo-icon">✳</span>
+      <span>WILD<span class="logo-accent">VISAYAS</span></span>
+    </a>
+
+    <button class="menu-toggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false">☰</button>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">Our Mission</a>
+      <a href="#wildlife">Wildlife</a>
+      <a href="#action">Take Action</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- LANDING PAGE CAROUSEL -->
+    <section id="home" class="hero" aria-label="Featured wildlife">
+
+      <div class="hero-slides">
+        <div class="hero-slide active"
+          data-animal="deer">
+          <img src="images/visayan-deer.jpg"
+            alt="Visayan spotted deer in its forest habitat">
         </div>
 
-    </dialog>
+        <div class="hero-slide" data-animal="pig">
+          <img src="images/warty-pig.jpg"
+            alt="Visayan warty pig">
+        </div>
 
+        <div class="hero-slide" data-animal="dulungan">
+          <img src="images/dulungan.jpg"
+            alt="Walden's hornbill">
+        </div>
 
-    <!-- JavaScript -->
-    <script src="script.js" defer></script>
+        <div class="hero-slide" data-animal="pigeon">
+          <img src="images/bleeding-heart.jpg"
+            alt="Negros bleeding-heart pigeon">
+        </div>
 
+        <div class="hero-slide" data-animal="hornbill">
+          <img src="images/visayan-hornbill.jpg"
+            alt="Visayan hornbill">
+        </div>
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <p class="eyebrow">DISCOVER • PROTECT • PRESERVE</p>
+
+        <h1>
+          The Wild Heart<br>
+          <em>of the Visayas.</em>
+        </h1>
+
+        <p class="hero-description">
+          Hidden within our islands are extraordinary
+          creatures fighting for survival.
+          Discover their stories and help protect
+          the wildlife that makes the Visayas unique.
+        </p>
+
+        <a href="#wildlife" class="btn btn-primary">
+          Explore Wildlife <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="slide-info" aria-live="polite">
+          <span class="slide-label">FEATURED SPECIES</span>
+          <h2 id="featured-name">Visayan Spotted Deer</h2>
+          <p id="featured-location">Panay & Negros</p>
+        </div>
+
+        <div class="carousel-controls">
+          <span id="slide-counter">01 / 05</span>
+
+          <button id="prev-slide"
+            aria-label="Previous animal">←</button>
+
+          <button id="next-slide"
+            aria-label="Next animal">→</button>
+        </div>
+      </div>
+
+      <div class="carousel-dots" aria-label="Choose featured animal">
+        <button class="dot active" data-slide="0"
+          aria-label="Show Visayan spotted deer"></button>
+        <button class="dot" data-slide="1"
+          aria-label="Show Visayan warty pig"></button>
+        <button class="dot" data-slide="2"
+          aria-label="Show Walden's hornbill"></button>
+        <button class="dot" data-slide="3"
+          aria-label="Show Negros bleeding-heart pigeon"></button>
+        <button class="dot" data-slide="4"
+          aria-label="Show Visayan hornbill"></button>
+      </div>
+    </section>
+
+    <!-- MISSION SECTION -->
+    <section id="about" class="section about-section">
+      <div class="section-heading">
+        <p class="eyebrow">OUR PURPOSE</p>
+        <h2>Protecting what makes<br>
+          <em>our islands alive.</em>
+        </h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            The Visayas is home to remarkable wildlife
+            found nowhere else on Earth. Yet habitat loss,
+            hunting, and human activities threaten the
+            survival of many native species.
+          </p>
+          <p>
+            WildVisayas is an educational initiative
+            dedicated to raising awareness, encouraging
+            conservation, and inspiring communities
+            to protect our natural heritage.
+          </p>
+        </div>
+
+        <div class="mission-card">
+          <span class="card-symbol">✳</span>
+          <h3>Our Mission</h3>
+          <p>
+            To inspire a generation that understands,
+            values, and protects the endangered
+            wildlife of the Visayan islands.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WILDLIFE EXPLORER -->
+    <section id="wildlife" class="section wildlife-section">
+      <div class="section-heading">
+        <p class="eyebrow">MEET OUR WILDLIFE</p>
+        <h2>Rare. Remarkable.<br><em>Worth Protecting.</em></h2>
+        <p>
+          Select an animal to discover its story,
+          habitat, conservation status, and threats.
+        </p>
+      </div>
+
+      <div class="wildlife-explorer">
+        <div class="animal-selector">
+          <label for="animal-select">CHOOSE A SPECIES</label>
+          <select id="animal-select">
+            <option value="deer">Visayan Spotted Deer</option>
+            <option value="pig">Visayan Warty Pig</option>
+            <option value="dulungan">Walden's Hornbill</option>
+            <option value="pigeon">Negros Bleeding-heart Pigeon</option>
+            <option value="hornbill">Visayan Hornbill</option>
+          </select>
+        </div>
+
+        <div class="animal-feature">
+          <div class="animal-image-wrap">
+            <img id="animal-image"
+              src="images/visayan-deer.jpg"
+              alt="Visayan spotted deer">
+          </div>
+
+          <div class="animal-details" aria-live="polite">
+            <span id="animal-status" class="status-badge">
+              Endangered
+            </span>
+
+            <h3 id="animal-name">Visayan Spotted Deer</h3>
+
+            <p id="animal-scientific" class="scientific-name">
+              Rusa alfredi
+            </p>
+
+            <p id="animal-description">
+              A rare forest deer known for its distinctive
+              white-spotted coat, native to the Visayan islands.
+            </p>
+
+            <div class="animal-facts">
+              <div>
+                <span class="fact-label">NATIVE HABITAT</span>
+                <p id="animal-habitat">Panay and Negros forests</p>
+              </div>
+
+              <div>
+                <span class="fact-label">MAJOR THREATS</span>
+                <p id="animal-threats">Hunting and habitat loss</p>
+              </div>
+            </div>
+
+            <div class="animal-fact-box">
+              <span class="fact-label">DID YOU KNOW?</span>
+              <p id="animal-funfact">
+                The Visayan spotted deer is one of the
+                rarest deer species in the world.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAKE ACTION -->
+    <section id="action" class="section action-section">
+      <p class="eyebrow">THE FUTURE STARTS WITH US</p>
+      <h2>Small Actions.<br><em>Lasting Impact.</em></h2>
+      <p>
+        Protecting endangered wildlife begins with awareness.
+        Every informed choice helps create a better future
+        for our islands.
+      </p>
+
+      <div class="action-grid">
+        <article class="action-card">
+          <span class="action-icon">01</span>
+          <h3>Learn & Share</h3>
+          <p>
+            Spread awareness about threatened Visayan
+            species and their habitats.
+          </p>
+        </article>
+
+        <article class="action-card">
+          <span class="action-icon">02</span>
+          <h3>Protect Habitats</h3>
+          <p>
+            Support responsible conservation and
+            local forest protection efforts.
+          </p>
+        </article>
+
+        <article class="action-card">
+          <span class="action-icon">03</span>
+          <h3>Respect Wildlife</h3>
+          <p>
+            Never purchase illegally captured wildlife
+            or products made from threatened species.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <a href="#home" class="logo">
+      ✳ WILD<span class="logo-accent">VISAYAS</span>
+    </a>
+
+    <p>
+      Celebrating and protecting the wildlife
+      of the Visayan islands.
+    </p>
+
+    <small>© 2026 WildVisayas • Educational Conservation Project</small>
+  </footer>
 </body>
 </html>
-
