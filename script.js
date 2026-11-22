@@ -69,6 +69,20 @@ const animals = [
       "Habitat loss, forest fragmentation, and hunting threaten this rare bird.",
     importance:
       "The Negros Bleeding-heart Dove contributes to the forest ecosystem through its feeding behavior and potential role in seed dispersal."
+  },
+  {
+    name: "Panay Monitor Lizard / Mabitang",
+    scientific: "Varanus mabitang",
+    status: "ENDANGERED",
+    image: "Panay Monitor Lizard.jpg",
+    description:
+      "The Panay Monitor Lizard, or Mabitang, is a rare, largely fruit-eating, tree-dwelling monitor lizard endemic to Panay's forests. Unlike many monitor lizards that are strictly carnivorous, Varanus mabitang feeds heavily on forest fruits.",
+    habitat:
+      "Tropical forests of Panay Island, particularly arboreal and forest habitats where native fruiting trees occur.",
+    threats:
+      "Habitat loss, forest fragmentation, and hunting threaten its limited population.",
+    importance:
+      "As a fruit-eating arboreal species, it helps disperse seeds from forest fruits and supports ecological balance in Panay's forests."
   }
 ];
 
