@@ -1,4 +1,3 @@
-
 const animals = [
   {
     name: "Visayan Hornbill",
@@ -183,6 +182,112 @@ const runSimulation = document.getElementById("runSimulation");
 const simulationOutput = document.getElementById("simulationOutput");
 
 let populationModule = null;
+let outcomePieChart = null;
+let habitatPieChart = null;
+
+function destroySimulatorCharts() {
+  if (outcomePieChart) {
+    outcomePieChart.destroy();
+    outcomePieChart = null;
+  }
+  if (habitatPieChart) {
+    habitatPieChart.destroy();
+    habitatPieChart = null;
+  }
+}
+
+function renderSimulatorCharts(initialPop, finalPop, forest, threat) {
+  destroySimulatorCharts();
+
+  if (typeof Chart !== "function") return;
+
+  const outcomeCanvas = document.getElementById("outcomePieCanvas");
+  const habitatCanvas = document.getElementById("habitatPieCanvas");
+  if (!outcomeCanvas || !habitatCanvas) return;
+
+  const roundedFinal = Math.max(0, Math.round(finalPop));
+  const delta = roundedFinal - initialPop;
+
+  let outcomeLabels;
+  let outcomeValues;
+  let outcomeColors;
+
+  if (delta < 0) {
+    outcomeLabels = ["Projected Survivors (Yr 10)", "Projected Loss"];
+    outcomeValues = [roundedFinal, Math.abs(delta)];
+    outcomeColors = ["#2e6f40", "#c85a32"];
+  } else {
+    outcomeLabels = ["Initial Baseline", "Net 10-Yr Gain"];
+    outcomeValues = [initialPop, delta];
+    outcomeColors = ["#2e6f40", "#5ca469"];
+  }
+
+  outcomePieChart = new Chart(outcomeCanvas.getContext("2d"), {
+    type: "pie",
+    data: {
+      labels: outcomeLabels,
+      datasets: [{
+        data: outcomeValues,
+        backgroundColor: outcomeColors,
+        borderColor: "#ffffff",
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: { boxWidth: 12, padding: 12, font: { size: 12 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const total = ctx.dataset.data.reduce((a, b) => a + b, 0) || 1;
+              const val = ctx.parsed;
+              const pct = ((val / total) * 100).toFixed(1);
+              return ` ${ctx.label}: ${val.toLocaleString()} (${pct}%)`;
+            }
+          }
+        }
+      }
+    }
+  });
+
+  const unprotectedForest = Math.max(0, 100 - forest);
+
+  habitatPieChart = new Chart(habitatCanvas.getContext("2d"), {
+    type: "pie",
+    data: {
+      labels: [
+        `Protected Forest (${forest}%)`,
+        `Unprotected Area (${unprotectedForest}%)`
+      ],
+      datasets: [{
+        data: [forest, unprotectedForest],
+        backgroundColor: ["#245c36", "#d9822b"],
+        borderColor: "#ffffff",
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: { boxWidth: 12, padding: 12, font: { size: 12 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ` ${ctx.label} · Threat Level: ${threat}%`
+          }
+        }
+      }
+    }
+  });
+}
 
 // LOAD COMPILED C PROGRAM
 
@@ -280,32 +385,61 @@ function executeSimulation() {
       10
     );
 
-  const change = finalPopulation - initialPopulation;
+  const roundedFinal = Math.max(0, Math.round(finalPopulation));
+  const change = roundedFinal - initialPopulation;
 
   const changeText =
     change > 0
-      ? "Increase of " + Math.round(change).toLocaleString()
+      ? "Increase of " + change.toLocaleString()
       : change < 0
-        ? "Decrease of " + Math.abs(Math.round(change)).toLocaleString()
+        ? "Decrease of " + Math.abs(change).toLocaleString()
         : "No change";
 
+  const changeClass =
+    change > 0 ? "trend-positive" : change < 0 ? "trend-negative" : "trend-neutral";
+
   simulationOutput.innerHTML = `
-    <h3>${animals[speciesIndex].name}</h3>
+    <div class="sim-header">
+      <div>
+        <h3>${animals[speciesIndex].name}</h3>
+        <p class="sim-sci"><em>${animals[speciesIndex].scientific}</em> · ${animals[speciesIndex].status}</p>
+      </div>
+      <div class="sim-projected-badge">
+        <span>10-Yr Projection</span>
+        <strong>${roundedFinal.toLocaleString()}</strong>
+      </div>
+    </div>
 
-    <p>Initial population:
-      <strong>${initialPopulation.toLocaleString()}</strong>
-    </p>
+    <div class="sim-summary-grid">
+      <div class="sim-stat-card">
+        <small>Initial Population</small>
+        <strong>${initialPopulation.toLocaleString()}</strong>
+      </div>
+      <div class="sim-stat-card ${changeClass}">
+        <small>10-Year Net Change</small>
+        <strong>${changeText} individuals</strong>
+      </div>
+      <div class="sim-stat-card">
+        <small>Forest / Threat</small>
+        <strong>${forest}% forest · ${threat}% threat</strong>
+      </div>
+    </div>
 
-    <p>Projected population after 10 years:</p>
+    <div class="sim-charts-grid">
+      <div class="sim-chart-card">
+        <h4>10-Year Population Breakdown</h4>
+        <div class="pie-box">
+          <canvas id="outcomePieCanvas"></canvas>
+        </div>
+      </div>
 
-    <h2>${Math.round(finalPopulation).toLocaleString()}</h2>
-
-    <p>${changeText} individuals</p>
-
-    <p>
-      Forest cover: ${forest}%<br>
-      Environmental threats: ${threat}%
-    </p>
+      <div class="sim-chart-card">
+        <h4>Forest Protection Split</h4>
+        <div class="pie-box">
+          <canvas id="habitatPieCanvas"></canvas>
+        </div>
+      </div>
+    </div>
 
     <h4>10-Year Population Projection</h4>
 
@@ -329,6 +463,8 @@ function executeSimulation() {
       actual wildlife population census or scientific forecast.
     </p>
   `;
+
+  renderSimulatorCharts(initialPopulation, finalPopulation, forest, threat);
 }
 
 runSimulation.disabled = true;
@@ -338,5 +474,3 @@ runSimulation.addEventListener("click", executeSimulation);
 
 showAnimal(0);
 initializeSimulator();
-
-
