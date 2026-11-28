@@ -1,5 +1,4 @@
-
-
+    
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,6 +34,7 @@ static const Species species_list[] = {
 // INPUT VALIDATION
 
 int clamp_int(int value, int min_val, int max_val) {
+
     if (value < min_val) {
         return min_val;
     }
@@ -46,10 +46,66 @@ int clamp_int(int value, int min_val, int max_val) {
     return value;
 }
 
+// SHARED POPULATION SIMULATION
+
+static double simulate_population(
+    int initial_pop,
+    int forest_percent,
+    int threat_percent,
+    int year
+) {
+
+    forest_percent = clamp_int(forest_percent, 10, 100);
+    threat_percent = clamp_int(threat_percent, 0, 80);
+    year = clamp_int(year, 0, SIMULATION_YEARS);
+
+    if (initial_pop < 0) {
+        initial_pop = 0;
+    }
+
+    double forest_cover = forest_percent / 100.0;
+    double threat_rate = threat_percent / 100.0;
+
+    double carrying_capacity = forest_percent * 15.0;
+    double pop = (double)initial_pop;
+
+    double growth_rate =
+        (forest_cover * 0.18) -
+        (threat_rate * 0.22);
+
+    // SIMULATE POPULATION YEAR BY YEAR
+
+    for (int current_year = 1;
+         current_year <= year;
+         ++current_year) {
+
+        if (growth_rate < 0.0) {
+
+            // Population declines under negative growth conditions
+
+            pop = pop + (pop * growth_rate);
+
+        } else {
+
+            // Logistic growth under positive growth conditions
+
+            pop = pop + pop * growth_rate *
+                (1.0 - (pop / carrying_capacity));
+        }
+
+        if (pop < 0.0) {
+            pop = 0.0;
+        }
+    }
+
+    return pop;
+}
+
 // GET NUMBER OF SPECIES
 
 EMSCRIPTEN_KEEPALIVE
 int get_species_count(void) {
+
     return (int)SPECIES_COUNT;
 }
 
@@ -58,7 +114,9 @@ int get_species_count(void) {
 EMSCRIPTEN_KEEPALIVE
 int get_initial_population(int species_index) {
 
-    if (species_index < 0 || species_index >= SPECIES_COUNT) {
+    if (species_index < 0 ||
+        species_index >= SPECIES_COUNT) {
+
         return -1;
     }
 
@@ -77,50 +135,21 @@ double get_population_at_year(
 
     // Validate species selection
 
-    if (species_index < 0 || species_index >= SPECIES_COUNT) {
+    if (species_index < 0 ||
+        species_index >= SPECIES_COUNT) {
+
         return -1.0;
     }
 
-    // Validate input values
-
-    forest_percent = clamp_int(forest_percent, 10, 100);
-    threat_percent = clamp_int(threat_percent, 0, 80);
-    year = clamp_int(year, 0, SIMULATION_YEARS);
-
-    // Initialize simulation variables
-
-    double forest_cover = forest_percent / 100.0;
-    double threat_rate = threat_percent / 100.0;
-
-    double carrying_capacity = forest_percent * 15.0;
-
-    double pop = (double)
-        species_list[species_index].initial_population;
-
-    // Calculate population growth rate
-
-    double growth_rate =
-        (forest_cover * 0.18) -
-        (threat_rate * 0.22);
-
-    // Population simulation
-
-    for (int current_year = 1;
-         current_year <= year;
-         ++current_year) {
-
-        pop = pop + pop * growth_rate *
-            (1.0 - (pop / carrying_capacity));
-
-        if (pop < 0.0) {
-            pop = 0.0;
-        }
-    }
-
-    return pop;
+    return simulate_population(
+        species_list[species_index].initial_population,
+        forest_percent,
+        threat_percent,
+        year
+    );
 }
 
-// PROJECT POPULATION FOR 10 YEARS
+// PROJECT POPULATION FOR THE NEXT 10 YEARS
 
 EMSCRIPTEN_KEEPALIVE
 int project_population(
@@ -129,38 +158,12 @@ int project_population(
     int threat_percent
 ) {
 
-    // Validate input values
+    double projected_population = simulate_population(
+        initial_pop,
+        forest_percent,
+        threat_percent,
+        SIMULATION_YEARS
+    );
 
-    forest_percent = clamp_int(forest_percent, 10, 100);
-    threat_percent = clamp_int(threat_percent, 0, 80);
-
-    if (initial_pop < 0) {
-        initial_pop = 0;
-    }
-
-    // Initialize simulation variables
-
-    double forest_cover = forest_percent / 100.0;
-    double threat_rate = threat_percent / 100.0;
-
-    double carrying_capacity = forest_percent * 15.0;
-    double pop = (double)initial_pop;
-
-    // Population simulation for 10 years
-
-    for (int year = 1; year <= SIMULATION_YEARS; ++year) {
-
-        double growth_rate =
-            (forest_cover * 0.18) -
-            (threat_rate * 0.22);
-
-        pop = pop + pop * growth_rate *
-            (1.0 - (pop / carrying_capacity));
-
-        if (pop < 0.0) {
-            pop = 0.0;
-        }
-    }
-
-    return (int)llround(pop);
+    return (int)llround(projected_population);
 }
