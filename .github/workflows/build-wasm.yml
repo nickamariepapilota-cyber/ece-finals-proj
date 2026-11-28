@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  compile:
     runs-on: ubuntu-latest
 
     container:
@@ -36,15 +36,41 @@ jobs:
             -sEXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' \
             -o population_simulator.js
 
-      - name: Save generated files to repository
+      - name: Upload generated files
+        uses: actions/upload-artifact@v4
+        with:
+          name: population-wasm
+          path: |
+            population_simulator.js
+            population_simulator.wasm
+          if-no-files-found: error
+
+  save:
+    runs-on: ubuntu-latest
+    needs: compile
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download generated files
+        uses: actions/download-artifact@v4
+        with:
+          name: population-wasm
+          path: build-output
+
+      - name: Commit generated files
         run: |
-          git -C "$GITHUB_WORKSPACE" config user.name "github-actions[bot]"
-          git -C "$GITHUB_WORKSPACE" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp build-output/population_simulator.js .
+          cp build-output/population_simulator.wasm .
 
-          git -C "$GITHUB_WORKSPACE" add population_simulator.js population_simulator.wasm
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          if ! git -C "$GITHUB_WORKSPACE" diff --cached --quiet; then
-            git -C "$GITHUB_WORKSPACE" commit -m "Build population simulator WebAssembly"
-            git -C "$GITHUB_WORKSPACE" push
+          git add population_simulator.js population_simulator.wasm
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Build population simulator WebAssembly"
+            git push
           fi
 
