@@ -26,8 +26,8 @@ jobs:
         run: |
           emcc main.c \
             -O2 \
+            --no-entry \
             -sWASM=1 \
-            -sNO_ENTRY=1 \
             -sMODULARIZE=1 \
             -sEXPORT_NAME=createPopulationSimulator \
             -sENVIRONMENT=web \
