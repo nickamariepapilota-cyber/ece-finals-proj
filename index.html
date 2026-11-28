@@ -22,7 +22,6 @@
     <nav class="nav-links" id="navLinks">
       <a href="#home">Home</a>
       <a href="#wildlife">Wildlife</a>
-      <a href="#c-code">C Code</a>
       <a href="#simulator">Simulator</a>
       <a href="#mission">Our Mission</a>
       <a href="#action" class="nav-cta">Take Action ↗</a>
@@ -127,58 +126,6 @@
           Because protecting nature begins with understanding it.
         </p>
       </div>
-    </section>
-
-    <section class="wildlife-section" id="c-code">
-      <div class="section-heading">
-        <div>
-          <span class="eyebrow">C PROGRAMMING</span>
-          <h2>Population model in <em>C.</em></h2>
-          <p>Terminal simulation for Visayan wildlife survival.</p>
-        </div>
-      </div>
-      <pre class="c-code-box"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;math.h&gt;
-
-#define MAX_NAME_LEN 64
-#define MAX_SCI_LEN 48
-#define MAX_STATUS_LEN 32
-#define SIMULATION_YEARS 10
-
-typedef struct {
-    char name[MAX_NAME_LEN];
-    char scientific_name[MAX_SCI_LEN];
-    char status[MAX_STATUS_LEN];
-    int initial_population;
-} Species;
-
-int clamp_int(int value, int min_val, int max_val) {
-    if (value &lt; min_val) return min_val;
-    if (value &gt; max_val) return max_val;
-    return value;
-}
-
-void run_simulation(const Species *sp, int forest_percent, int threat_percent) {
-    double forest_cover = forest_percent / 100.0;
-    double threat_rate = threat_percent / 100.0;
-    double carrying_capacity = forest_percent * 15.0;
-    double pop = (double)sp-&gt;initial_population;
-
-    printf("\nSpecies: %s (%s)\n", sp-&gt;name, sp-&gt;scientific_name);
-    printf("Status : %s\n", sp-&gt;status);
-    printf("Forest : %d%% | Threat: %d%%\n\n", forest_percent, threat_percent);
-    printf("%-8s %-18s\n", "Year", "Projected Pop.");
-    printf("%-8d %-18d\n", 0, sp-&gt;initial_population);
-
-    for (int year = 1; year &lt;= SIMULATION_YEARS; ++year) {
-        double growth_rate = (forest_cover * 0.18) - (threat_rate * 0.22);
-        pop = pop + pop * growth_rate * (1.0 - (pop / carrying_capacity));
-        if (pop &lt; 0.0) pop = 0.0;
-        printf("%-8d %-18d\n", year, (int)llround(pop));
-    }
-}</code></pre>
     </section>
 
     <section class="simulator-section" id="simulator">
