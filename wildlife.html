@@ -1,1 +1,286 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Explore endangered wildlife and conservation in the Visayas.">
+
+  <title>WildVisayas | Explore Wildlife</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="population_simulator.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <header class="navbar">
+
+    <a href="index.html" class="logo">
+      <span class="logo-icon">✳</span> WildVisayas
+    </a>
+
+    <button class="menu-toggle" id="menuToggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false">☰</button>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="#wildlife">Wildlife</a>
+      <a href="#simulator">Simulator</a>
+      <a href="#mission">Our Mission</a>
+      <a href="#action" class="nav-cta">Take Action ↗</a>
+    </nav>
+
+  </header>
+
+  <main>
+
+    <!-- WILDLIFE CAROUSEL -->
+
+    <section class="wildlife-section" id="wildlife">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">MEET THE WILDLIFE</span>
+          <h2>Faces of the <em>forest.</em></h2>
+          <p>
+            Explore some of the extraordinary animals
+            that need our protection.
+          </p>
+        </div>
+
+        <div class="carousel-controls">
+          <button id="prevBtn" aria-label="Previous animal">←</button>
+          <button id="nextBtn" aria-label="Next animal">→</button>
+        </div>
+
+      </div>
+
+      <div class="animal-card">
+
+        <div class="animal-image-wrapper">
+
+          <img id="animalImage"
+            src="images/visayan-hornbill.jpeg"
+            alt="Visayan Hornbill">
+
+          <span class="image-tag">
+            VISAYAS · PHILIPPINES
+          </span>
+
+        </div>
+
+        <div class="animal-content">
+
+          <span class="animal-number" id="animalNumber">
+            01 / 05
+          </span>
+
+          <span class="status" id="animalStatus">
+            ENDANGERED
+          </span>
+
+          <h3 id="animalName">Visayan Hornbill</h3>
+
+          <p class="scientific-name" id="scientificName">
+            Penelopides panini
+          </p>
+
+          <p class="animal-description" id="animalDescription"></p>
+
+          <button class="learn-btn" id="learnMoreBtn"
+            aria-expanded="false"
+            aria-controls="animalDetails">
+
+            Discover their story
+            <span id="expandIcon">＋</span>
+
+          </button>
+
+          <div class="animal-details" id="animalDetails" hidden>
+
+            <h4>Habitat</h4>
+            <p id="animalHabitat"></p>
+
+            <h4>Threats</h4>
+            <p id="animalThreats"></p>
+
+            <h4>Why they matter</h4>
+            <p id="animalImportance"></p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="carousel-dots" id="carouselDots"
+        aria-label="Choose featured animal"></div>
+
+    </section>
+
+
+    <!-- OUR MISSION -->
+
+    <section class="mission-section" id="mission">
+
+      <div class="mission-label">
+
+        <span class="eyebrow">OUR PURPOSE</span>
+
+        <h2>
+          Nature needs<br>
+          <em>our voices.</em>
+        </h2>
+
+      </div>
+
+      <div class="mission-content">
+
+        <p>
+          The Visayas is home to wildlife found nowhere else
+          on Earth. Yet habitat destruction, hunting, and
+          other human pressures threaten their survival.
+        </p>
+
+        <p>
+          WildVisayas exists to inspire awareness,
+          appreciation, and responsible action for
+          endangered species. Because protecting nature
+          begins with understanding it.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- POPULATION SIMULATOR -->
+
+    <section class="simulator-section" id="simulator">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">EXPLORE THE FUTURE</span>
+
+          <h2>
+            Can we save <em>their future?</em>
+          </h2>
+
+          <p>
+            Simulate how forest conservation and environmental
+            threats may influence wildlife populations.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="simulator-container">
+
+        <div class="simulator-controls">
+
+          <h3>Population Simulator</h3>
+
+          <label for="speciesSelect">Select a species</label>
+
+          <select id="speciesSelect">
+            <option value="0">Visayan Hornbill</option>
+            <option value="1">Visayan Spotted Deer</option>
+            <option value="2">Visayan Warty Pig</option>
+            <option value="3">Dulungan</option>
+            <option value="4">Negros Bleeding-heart Dove</option>
+            <option value="5">Panay Monitor Lizard</option>
+            <option value="6">Philippine Tarsier</option>
+          </select>
+
+          <label for="forestInput">
+            Protected Forest Cover:
+            <span id="forestDisplay">65%</span>
+          </label>
+
+          <input type="range" id="forestInput"
+            min="10" max="100" value="65">
+
+          <label for="threatInput">
+            Poaching and Habitat Threat:
+            <span id="threatDisplay">30%</span>
+          </label>
+
+          <input type="range" id="threatInput"
+            min="0" max="80" value="30">
+
+          <button type="button" id="runSimulation">
+            Run Simulation ↗
+          </button>
+
+        </div>
+
+        <div class="simulator-results">
+
+          <span class="eyebrow">SIMULATION RESULTS</span>
+
+          <div id="simulationOutput">
+
+            <h3>Ready to explore?</h3>
+
+            <p>
+              Select a species and adjust the environmental
+              conditions to see its projected population.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TAKE ACTION -->
+
+    <section class="action-section" id="action">
+
+      <span class="eyebrow">BE PART OF THE CHANGE</span>
+
+      <h2>
+        Small actions.<br>
+        <em>Lasting impact.</em>
+      </h2>
+
+      <p>
+        Share what you learn, respect wildlife habitats,
+        support conservation organizations, and inspire
+        others to care.
+      </p>
+
+      <a href="#wildlife" class="light-btn">
+        Explore Wildlife ↗
+      </a>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <strong>✳ WildVisayas</strong>
+
+    <span>For the wild. For the future.</span>
+
+    <small>
+      Educational conservation awareness project · 2026
+    </small>
+
+  </footer>
+
+</body>
+</html>
+
