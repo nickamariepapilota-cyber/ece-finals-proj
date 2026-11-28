@@ -38,11 +38,13 @@ jobs:
 
       - name: Save generated files to repository
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add population_simulator.js population_simulator.wasm
-          if ! git diff --cached --quiet; then
-            git commit -m "Build population simulator WebAssembly"
-            git push
+          git -C "$GITHUB_WORKSPACE" config user.name "github-actions[bot]"
+          git -C "$GITHUB_WORKSPACE" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git -C "$GITHUB_WORKSPACE" add population_simulator.js population_simulator.wasm
+
+          if ! git -C "$GITHUB_WORKSPACE" diff --cached --quiet; then
+            git -C "$GITHUB_WORKSPACE" commit -m "Build population simulator WebAssembly"
+            git -C "$GITHUB_WORKSPACE" push
           fi
 
