@@ -1,3 +1,4 @@
+
 const animals = [
   {
     name: "Visayan Hornbill",
@@ -71,107 +72,163 @@ const animals = [
   }
 ];
 
-// CAROUSEL
 
-let currentIndex = 0;
+// ========================================
+// 1. WILDLIFE CAROUSEL
+// Runs only on wildlife.html
+// ========================================
 
 const animalImage = document.getElementById("animalImage");
-const animalName = document.getElementById("animalName");
-const scientificName = document.getElementById("scientificName");
-const animalStatus = document.getElementById("animalStatus");
-const animalNumber = document.getElementById("animalNumber");
-const animalDescription = document.getElementById("animalDescription");
-const animalHabitat = document.getElementById("animalHabitat");
-const animalThreats = document.getElementById("animalThreats");
-const animalImportance = document.getElementById("animalImportance");
-const animalDetails = document.getElementById("animalDetails");
-const learnMoreBtn = document.getElementById("learnMoreBtn");
-const expandIcon = document.getElementById("expandIcon");
-const dotsContainer = document.getElementById("carouselDots");
 
-function showAnimal(index) {
-  currentIndex = (index + animals.length) % animals.length;
+if (animalImage) {
 
-  const animal = animals[currentIndex];
+  let currentIndex = 0;
 
-  animalImage.src = animal.image;
-  animalImage.alt = animal.name;
-  animalName.textContent = animal.name;
-  scientificName.textContent = animal.scientific;
-  animalStatus.textContent = animal.status;
+  const animalName = document.getElementById("animalName");
+  const scientificName = document.getElementById("scientificName");
+  const animalStatus = document.getElementById("animalStatus");
+  const animalNumber = document.getElementById("animalNumber");
+  const animalDescription = document.getElementById("animalDescription");
+  const animalHabitat = document.getElementById("animalHabitat");
+  const animalThreats = document.getElementById("animalThreats");
+  const animalImportance = document.getElementById("animalImportance");
+  const animalDetails = document.getElementById("animalDetails");
+  const learnMoreBtn = document.getElementById("learnMoreBtn");
+  const expandIcon = document.getElementById("expandIcon");
+  const dotsContainer = document.getElementById("carouselDots");
 
-  animalNumber.textContent =
-    String(currentIndex + 1).padStart(2, "0") +
-    " / " + String(animals.length).padStart(2, "0");
+  const nextBtn = document.getElementById("nextBtn");
+  const prevBtn = document.getElementById("prevBtn");
 
-  animalDescription.textContent = animal.description;
-  animalHabitat.textContent = animal.habitat;
-  animalThreats.textContent = animal.threats;
-  animalImportance.textContent = animal.importance;
+  function showAnimal(index) {
 
-  animalDetails.hidden = true;
-  learnMoreBtn.setAttribute("aria-expanded", "false");
-  expandIcon.textContent = "＋";
+    currentIndex = (index + animals.length) % animals.length;
 
-  updateDots();
-}
+    const animal = animals[currentIndex];
 
-function updateDots() {
-  dotsContainer.innerHTML = "";
+    animalImage.src = animal.image;
+    animalImage.alt = animal.name;
 
-  animals.forEach((animal, index) => {
-    const dot = document.createElement("button");
+    animalName.textContent = animal.name;
+    scientificName.textContent = animal.scientific;
+    animalStatus.textContent = animal.status;
 
-    dot.type = "button";
-    dot.setAttribute("aria-label", "Show " + animal.name);
+    animalNumber.textContent =
+      String(currentIndex + 1).padStart(2, "0") +
+      " / " +
+      String(animals.length).padStart(2, "0");
 
-    if (index === currentIndex) {
-      dot.classList.add("active");
-      dot.setAttribute("aria-current", "true");
-    }
+    animalDescription.textContent = animal.description;
+    animalHabitat.textContent = animal.habitat;
+    animalThreats.textContent = animal.threats;
+    animalImportance.textContent = animal.importance;
 
-    dot.addEventListener("click", () => showAnimal(index));
-    dotsContainer.appendChild(dot);
+    animalDetails.hidden = true;
+
+    learnMoreBtn.setAttribute("aria-expanded", "false");
+    expandIcon.textContent = "＋";
+
+    updateDots();
+  }
+
+  function updateDots() {
+
+    dotsContainer.innerHTML = "";
+
+    animals.forEach((animal, index) => {
+
+      const dot = document.createElement("button");
+
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Show " + animal.name);
+
+      if (index === currentIndex) {
+        dot.classList.add("active");
+        dot.setAttribute("aria-current", "true");
+      }
+
+      dot.addEventListener("click", () => {
+        showAnimal(index);
+      });
+
+      dotsContainer.appendChild(dot);
+
+    });
+  }
+
+  nextBtn.addEventListener("click", () => {
+    showAnimal(currentIndex + 1);
   });
+
+  prevBtn.addEventListener("click", () => {
+    showAnimal(currentIndex - 1);
+  });
+
+  learnMoreBtn.addEventListener("click", () => {
+
+    const willOpen = animalDetails.hidden;
+
+    animalDetails.hidden = !willOpen;
+
+    learnMoreBtn.setAttribute(
+      "aria-expanded",
+      String(willOpen)
+    );
+
+    expandIcon.textContent = willOpen ? "−" : "＋";
+
+  });
+
+  // Display first animal
+  showAnimal(0);
+
 }
 
-document.getElementById("nextBtn").addEventListener("click", () => {
-  showAnimal(currentIndex + 1);
-});
 
-document.getElementById("prevBtn").addEventListener("click", () => {
-  showAnimal(currentIndex - 1);
-});
-
-learnMoreBtn.addEventListener("click", () => {
-  const willOpen = animalDetails.hidden;
-
-  animalDetails.hidden = !willOpen;
-  learnMoreBtn.setAttribute("aria-expanded", String(willOpen));
-  expandIcon.textContent = willOpen ? "−" : "＋";
-});
-
-// MOBILE NAVIGATION
+// ========================================
+// 2. MOBILE NAVIGATION
+// Runs on pages containing navigation
+// ========================================
 
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
+if (menuToggle && navLinks) {
 
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.textContent = isOpen ? "✕" : "☰";
-});
+  menuToggle.addEventListener("click", () => {
 
-navLinks.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.textContent = "☰";
+    const isOpen = navLinks.classList.toggle("open");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      String(isOpen)
+    );
+
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+
   });
-});
 
-// C POPULATION SIMULATOR
+  navLinks.querySelectorAll("a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      navLinks.classList.remove("open");
+
+      menuToggle.setAttribute("aria-expanded", "false");
+
+      menuToggle.textContent = "☰";
+
+    });
+
+  });
+
+}
+
+
+// ========================================
+// 3. C POPULATION SIMULATOR
+// Runs only on wildlife.html
+// ========================================
 
 const speciesSelect = document.getElementById("speciesSelect");
 const forestInput = document.getElementById("forestInput");
@@ -181,296 +238,453 @@ const threatDisplay = document.getElementById("threatDisplay");
 const runSimulation = document.getElementById("runSimulation");
 const simulationOutput = document.getElementById("simulationOutput");
 
-let populationModule = null;
-let outcomePieChart = null;
-let habitatPieChart = null;
+if (
+  speciesSelect &&
+  forestInput &&
+  threatInput &&
+  forestDisplay &&
+  threatDisplay &&
+  runSimulation &&
+  simulationOutput
+) {
 
-function destroySimulatorCharts() {
-  if (outcomePieChart) {
-    outcomePieChart.destroy();
-    outcomePieChart = null;
-  }
-  if (habitatPieChart) {
-    habitatPieChart.destroy();
-    habitatPieChart = null;
-  }
-}
+  let populationModule = null;
+  let outcomePieChart = null;
+  let habitatPieChart = null;
 
-function renderSimulatorCharts(initialPop, finalPop, forest, threat) {
-  destroySimulatorCharts();
+  function destroySimulatorCharts() {
 
-  if (typeof Chart !== "function") return;
+    if (outcomePieChart) {
+      outcomePieChart.destroy();
+      outcomePieChart = null;
+    }
 
-  const outcomeCanvas = document.getElementById("outcomePieCanvas");
-  const habitatCanvas = document.getElementById("habitatPieCanvas");
-  if (!outcomeCanvas || !habitatCanvas) return;
+    if (habitatPieChart) {
+      habitatPieChart.destroy();
+      habitatPieChart = null;
+    }
 
-  const roundedFinal = Math.max(0, Math.round(finalPop));
-  const delta = roundedFinal - initialPop;
-
-  let outcomeLabels;
-  let outcomeValues;
-  let outcomeColors;
-
-  if (delta < 0) {
-    outcomeLabels = ["Projected Survivors (Yr 10)", "Projected Loss"];
-    outcomeValues = [roundedFinal, Math.abs(delta)];
-    outcomeColors = ["#2e6f40", "#c85a32"];
-  } else {
-    outcomeLabels = ["Initial Baseline", "Net 10-Yr Gain"];
-    outcomeValues = [initialPop, delta];
-    outcomeColors = ["#2e6f40", "#5ca469"];
   }
 
-  outcomePieChart = new Chart(outcomeCanvas.getContext("2d"), {
-    type: "pie",
-    data: {
-      labels: outcomeLabels,
-      datasets: [{
-        data: outcomeValues,
-        backgroundColor: outcomeColors,
-        borderColor: "#ffffff",
-        borderWidth: 2
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: {
-          position: "bottom",
-          labels: { boxWidth: 12, padding: 12, font: { size: 12 } }
-        },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => {
-              const total = ctx.dataset.data.reduce((a, b) => a + b, 0) || 1;
-              const val = ctx.parsed;
-              const pct = ((val / total) * 100).toFixed(1);
-              return ` ${ctx.label}: ${val.toLocaleString()} (${pct}%)`;
+  function renderSimulatorCharts(initialPop, finalPop, forest, threat) {
+
+    destroySimulatorCharts();
+
+    if (typeof Chart !== "function") return;
+
+    const outcomeCanvas = document.getElementById("outcomePieCanvas");
+    const habitatCanvas = document.getElementById("habitatPieCanvas");
+
+    if (!outcomeCanvas || !habitatCanvas) return;
+
+    const roundedFinal = Math.max(0, Math.round(finalPop));
+    const delta = roundedFinal - initialPop;
+
+    let outcomeLabels;
+    let outcomeValues;
+    let outcomeColors;
+
+    if (delta < 0) {
+
+      outcomeLabels = [
+        "Projected Survivors (Yr 10)",
+        "Projected Loss"
+      ];
+
+      outcomeValues = [
+        roundedFinal,
+        Math.abs(delta)
+      ];
+
+      outcomeColors = ["#2e6f40", "#c85a32"];
+
+    } else {
+
+      outcomeLabels = [
+        "Initial Baseline",
+        "Net 10-Yr Gain"
+      ];
+
+      outcomeValues = [
+        initialPop,
+        delta
+      ];
+
+      outcomeColors = ["#2e6f40", "#5ca469"];
+
+    }
+
+    outcomePieChart = new Chart(outcomeCanvas.getContext("2d"), {
+
+      type: "pie",
+
+      data: {
+        labels: outcomeLabels,
+
+        datasets: [{
+          data: outcomeValues,
+          backgroundColor: outcomeColors,
+          borderColor: "#ffffff",
+          borderWidth: 2
+        }]
+      },
+
+      options: {
+
+        responsive: true,
+        maintainAspectRatio: true,
+
+        plugins: {
+
+          legend: {
+            position: "bottom",
+            labels: {
+              boxWidth: 12,
+              padding: 12,
+              font: { size: 12 }
             }
+          },
+
+          tooltip: {
+
+            callbacks: {
+
+              label: (ctx) => {
+
+                const total =
+                  ctx.dataset.data.reduce((a, b) => a + b, 0) || 1;
+
+                const val = ctx.parsed;
+                const pct = ((val / total) * 100).toFixed(1);
+
+                return ` ${ctx.label}: ${val.toLocaleString()} (${pct}%)`;
+
+              }
+
+            }
+
           }
+
         }
+
       }
+
+    });
+
+    const unprotectedForest = Math.max(0, 100 - forest);
+
+    habitatPieChart = new Chart(habitatCanvas.getContext("2d"), {
+
+      type: "pie",
+
+      data: {
+
+        labels: [
+          `Protected Forest (${forest}%)`,
+          `Unprotected Area (${unprotectedForest}%)`
+        ],
+
+        datasets: [{
+
+          data: [forest, unprotectedForest],
+
+          backgroundColor: [
+            "#245c36",
+            "#d9822b"
+          ],
+
+          borderColor: "#ffffff",
+          borderWidth: 2
+
+        }]
+
+      },
+
+      options: {
+
+        responsive: true,
+        maintainAspectRatio: true,
+
+        plugins: {
+
+          legend: {
+            position: "bottom",
+            labels: {
+              boxWidth: 12,
+              padding: 12,
+              font: { size: 12 }
+            }
+          },
+
+          tooltip: {
+
+            callbacks: {
+
+              label: (ctx) => {
+                return ` ${ctx.label} · Threat Level: ${threat}%`;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    });
+
+  }
+
+
+  // LOAD COMPILED C PROGRAM
+
+  async function initializeSimulator() {
+
+    runSimulation.disabled = true;
+
+    if (typeof createPopulationSimulator !== "function") {
+
+      simulationOutput.innerHTML =
+        "<h3>Simulator unavailable</h3>" +
+        "<p>WebAssembly could not be loaded. Please check the generated files and try again.</p>";
+
+      return;
+
     }
+
+    try {
+
+      populationModule = await createPopulationSimulator();
+
+      const speciesCount =
+        populationModule._get_species_count();
+
+      if (speciesCount !== animals.length) {
+        throw new Error("Species database mismatch.");
+      }
+
+      runSimulation.disabled = false;
+
+      simulationOutput.innerHTML =
+        "<h3>Ready to explore!</h3>" +
+        "<p>Select a species and adjust the environmental conditions to see its projected population.</p>";
+
+    } catch (error) {
+
+      console.error("Simulator initialization failed:", error);
+
+      simulationOutput.innerHTML =
+        "<h3>Unable to initialize simulator</h3>" +
+        "<p>Please check the WebAssembly files and try again.</p>";
+
+      runSimulation.disabled = true;
+
+    }
+
+  }
+
+
+  // UPDATE SLIDER LABELS
+
+  forestInput.addEventListener("input", () => {
+    forestDisplay.textContent = forestInput.value + "%";
   });
 
-  const unprotectedForest = Math.max(0, 100 - forest);
-
-  habitatPieChart = new Chart(habitatCanvas.getContext("2d"), {
-    type: "pie",
-    data: {
-      labels: [
-        `Protected Forest (${forest}%)`,
-        `Unprotected Area (${unprotectedForest}%)`
-      ],
-      datasets: [{
-        data: [forest, unprotectedForest],
-        backgroundColor: ["#245c36", "#d9822b"],
-        borderColor: "#ffffff",
-        borderWidth: 2
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: {
-          position: "bottom",
-          labels: { boxWidth: 12, padding: 12, font: { size: 12 } }
-        },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => ` ${ctx.label} · Threat Level: ${threat}%`
-          }
-        }
-      }
-    }
+  threatInput.addEventListener("input", () => {
+    threatDisplay.textContent = threatInput.value + "%";
   });
-}
 
-// LOAD COMPILED C PROGRAM
 
-async function initializeSimulator() {
-  if (typeof createPopulationSimulator !== "function") {
-    simulationOutput.innerHTML =
-      "<h3>Simulator unavailable</h3>" +
-      "<p>WebAssembly could not be loaded. Please check the generated files and try again.</p>";
-    runSimulation.disabled = true;
-    return;
-  }
+  // RUN C SIMULATION
 
-  try {
-    populationModule = await createPopulationSimulator();
+  function executeSimulation() {
 
-    const speciesCount = populationModule._get_species_count();
+    if (!populationModule) {
 
-    if (speciesCount !== animals.length) {
-      throw new Error("Species database mismatch.");
+      simulationOutput.innerHTML =
+        "<p>The simulator is still loading. Please wait.</p>";
+
+      return;
+
     }
 
-    runSimulation.disabled = false;
+    const speciesIndex = Number(speciesSelect.value);
+    const forest = Number(forestInput.value);
+    const threat = Number(threatInput.value);
 
-    simulationOutput.innerHTML =
-      "<h3>Ready to explore!</h3>" +
-      "<p>Select a species and adjust the environmental conditions to see its projected population.</p>";
+    if (
+      !Number.isInteger(speciesIndex) ||
+      speciesIndex < 0 ||
+      speciesIndex >= animals.length
+    ) {
 
-  } catch (error) {
-    console.error("Simulator initialization failed:", error);
+      simulationOutput.innerHTML =
+        "<p>Invalid species selection.</p>";
 
-    simulationOutput.innerHTML =
-      "<h3>Unable to initialize simulator</h3>" +
-      "<p>Please check the WebAssembly files and try again.</p>";
+      return;
 
-    runSimulation.disabled = true;
-  }
-}
+    }
 
-// UPDATE SLIDER LABELS
+    const initialPopulation =
+      populationModule._get_initial_population(speciesIndex);
 
-forestInput.addEventListener("input", () => {
-  forestDisplay.textContent = forestInput.value + "%";
-});
+    if (initialPopulation < 0) {
 
-threatInput.addEventListener("input", () => {
-  threatDisplay.textContent = threatInput.value + "%";
-});
+      simulationOutput.innerHTML =
+        "<p>Invalid species selection.</p>";
 
-// RUN C SIMULATION
+      return;
 
-function executeSimulation() {
-  if (!populationModule) {
-    simulationOutput.innerHTML =
-      "<p>The simulator is still loading. Please wait.</p>";
-    return;
-  }
+    }
 
-  const speciesIndex = Number(speciesSelect.value);
-  const forest = Number(forestInput.value);
-  const threat = Number(threatInput.value);
+    let rows = "";
 
-  const initialPopulation =
-    populationModule._get_initial_population(speciesIndex);
+    for (let year = 0; year <= 10; year++) {
 
-  if (initialPopulation < 0) {
-    simulationOutput.innerHTML =
-      "<p>Invalid species selection.</p>";
-    return;
-  }
+      const population =
+        populationModule._get_population_at_year(
+          speciesIndex,
+          forest,
+          threat,
+          year
+        );
 
-  let rows = "";
+      rows += `
+        <tr>
+          <td>Year ${year}</td>
+          <td>${Math.round(population).toLocaleString()}</td>
+        </tr>
+      `;
 
-  for (let year = 0; year <= 10; year++) {
-    const population =
+    }
+
+    const finalPopulation =
       populationModule._get_population_at_year(
         speciesIndex,
         forest,
         threat,
-        year
+        10
       );
 
-    rows += `
-      <tr>
-        <td>Year ${year}</td>
-        <td>${Math.round(population).toLocaleString()}</td>
-      </tr>
-    `;
-  }
+    const roundedFinal = Math.max(0, Math.round(finalPopulation));
 
-  const finalPopulation =
-    populationModule._get_population_at_year(
-      speciesIndex,
+    const change = roundedFinal - initialPopulation;
+
+    const changeText =
+      change > 0
+        ? "Increase of " + change.toLocaleString()
+        : change < 0
+          ? "Decrease of " + Math.abs(change).toLocaleString()
+          : "No change";
+
+    const changeClass =
+      change > 0
+        ? "trend-positive"
+        : change < 0
+          ? "trend-negative"
+          : "trend-neutral";
+
+    simulationOutput.innerHTML = `
+
+      <div class="sim-header">
+
+        <div>
+          <h3>${animals[speciesIndex].name}</h3>
+
+          <p class="sim-sci">
+            <em>${animals[speciesIndex].scientific}</em>
+            · ${animals[speciesIndex].status}
+          </p>
+        </div>
+
+        <div class="sim-projected-badge">
+          <span>10-Yr Projection</span>
+          <strong>${roundedFinal.toLocaleString()}</strong>
+        </div>
+
+      </div>
+
+      <div class="sim-summary-grid">
+
+        <div class="sim-stat-card">
+          <small>Initial Population</small>
+          <strong>${initialPopulation.toLocaleString()}</strong>
+        </div>
+
+        <div class="sim-stat-card ${changeClass}">
+          <small>10-Year Net Change</small>
+          <strong>${changeText} individuals</strong>
+        </div>
+
+        <div class="sim-stat-card">
+          <small>Forest / Threat</small>
+          <strong>${forest}% forest · ${threat}% threat</strong>
+        </div>
+
+      </div>
+
+      <div class="sim-charts-grid">
+
+        <div class="sim-chart-card">
+          <h4>10-Year Population Breakdown</h4>
+
+          <div class="pie-box">
+            <canvas id="outcomePieCanvas"></canvas>
+          </div>
+        </div>
+
+        <div class="sim-chart-card">
+          <h4>Forest Protection Split</h4>
+
+          <div class="pie-box">
+            <canvas id="habitatPieCanvas"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <h4>10-Year Population Projection</h4>
+
+      <div class="projection-table-wrapper">
+
+        <table class="projection-table">
+
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Population</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            ${rows}
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <p class="simulation-note">
+        Educational mathematical projection based on the
+        selected environmental conditions. This is not an
+        actual wildlife population census or scientific forecast.
+      </p>
+
+    `;
+
+    renderSimulatorCharts(
+      initialPopulation,
+      finalPopulation,
       forest,
-      threat,
-      10
+      threat
     );
 
-  const roundedFinal = Math.max(0, Math.round(finalPopulation));
-  const change = roundedFinal - initialPopulation;
+  }
 
-  const changeText =
-    change > 0
-      ? "Increase of " + change.toLocaleString()
-      : change < 0
-        ? "Decrease of " + Math.abs(change).toLocaleString()
-        : "No change";
+  runSimulation.addEventListener("click", executeSimulation);
 
-  const changeClass =
-    change > 0 ? "trend-positive" : change < 0 ? "trend-negative" : "trend-neutral";
+  // Initialize the compiled C simulator
+  initializeSimulator();
 
-  simulationOutput.innerHTML = `
-    <div class="sim-header">
-      <div>
-        <h3>${animals[speciesIndex].name}</h3>
-        <p class="sim-sci"><em>${animals[speciesIndex].scientific}</em> · ${animals[speciesIndex].status}</p>
-      </div>
-      <div class="sim-projected-badge">
-        <span>10-Yr Projection</span>
-        <strong>${roundedFinal.toLocaleString()}</strong>
-      </div>
-    </div>
-
-    <div class="sim-summary-grid">
-      <div class="sim-stat-card">
-        <small>Initial Population</small>
-        <strong>${initialPopulation.toLocaleString()}</strong>
-      </div>
-      <div class="sim-stat-card ${changeClass}">
-        <small>10-Year Net Change</small>
-        <strong>${changeText} individuals</strong>
-      </div>
-      <div class="sim-stat-card">
-        <small>Forest / Threat</small>
-        <strong>${forest}% forest · ${threat}% threat</strong>
-      </div>
-    </div>
-
-    <div class="sim-charts-grid">
-      <div class="sim-chart-card">
-        <h4>10-Year Population Breakdown</h4>
-        <div class="pie-box">
-          <canvas id="outcomePieCanvas"></canvas>
-        </div>
-      </div>
-
-      <div class="sim-chart-card">
-        <h4>Forest Protection Split</h4>
-        <div class="pie-box">
-          <canvas id="habitatPieCanvas"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <h4>10-Year Population Projection</h4>
-
-    <div class="projection-table-wrapper">
-      <table class="projection-table">
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Population</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${rows}
-        </tbody>
-      </table>
-    </div>
-
-    <p class="simulation-note">
-      Educational mathematical projection based on the
-      selected environmental conditions. This is not an
-      actual wildlife population census or scientific forecast.
-    </p>
-  `;
-
-  renderSimulatorCharts(initialPopulation, finalPopulation, forest, threat);
 }
-
-runSimulation.disabled = true;
-runSimulation.addEventListener("click", executeSimulation);
-
-// INITIALIZE WEBSITE
-
-showAnimal(0);
-initializeSimulator();
